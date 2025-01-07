@@ -15,11 +15,9 @@ class OneSurahPage extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Colors.blue,
       appBar: AppBar(
-        backgroundColor: Colors.blue,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_rounded,color: Colors.white),
+          icon: Icon(Icons.arrow_back_ios_new_rounded,color: Colors.black),
           onPressed: () {
             context.go('/main');
           },
@@ -29,7 +27,7 @@ class OneSurahPage extends StatelessWidget {
             if (state is OneSurahLoaded) {
               return Text(
                 state.surah.data?.englishName ?? '',
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
               );
             }
             return Text('');

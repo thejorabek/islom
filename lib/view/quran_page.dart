@@ -18,11 +18,9 @@ class _QuranPageState extends State<QuranPage> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Colors.blue,
       appBar: AppBar(
-        title: Text('Quran', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        title: Text('Quran', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         centerTitle: true,
-        backgroundColor: Colors.blue,
       ),
       body: BlocBuilder<SurahBloc, SurahState>(builder: (context, state){
         if (state is SurahLoading) {
