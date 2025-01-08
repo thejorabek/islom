@@ -14,7 +14,6 @@ class BookBloc extends Bloc<BookEvent, BookState> {
     String apiKey = "\$2y\$10\$h291YW7aSe2d6a3O0Lu8uoomcoTNX1kL2mcQoFNoqmXOIkQ7dm";
     emit(HadithLoading());
     try {
-      // Replace this URL with your actual API endpoint
       final response = await http.get(Uri.parse("https://hadithapi.com/api/books?apiKey=$apiKey"));
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);

@@ -3,12 +3,45 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:islom/bloc/surah_bloc/one_surah_bloc.dart';
 import 'package:islom/bloc/surah_bloc/one_surah_state.dart';
+import 'package:islom/service/player_service.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
+import 'package:rxdart/rxdart.dart';
 
-class OneSurahPage extends StatelessWidget {
+class OneSurahPage extends StatefulWidget {
   final int? surahNumber;
 
   const OneSurahPage({Key? key, this.surahNumber}) : super(key: key);
+
+  @override
+  State<OneSurahPage> createState() => _OneSurahPageState();
+}
+
+class _OneSurahPageState extends State<OneSurahPage> {
+  late AudioPlayer _audioPlayer;
+
+  @override
+  void initState() {
+    super.initState();
+    _audioPlayer = AudioPlayer();
+    print(widget.surahNumber);
+    _audioPlayer.setUrl('https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${widget.surahNumber}.mp3');
+  }
+
+  @override
+  void dispose() {
+    _audioPlayer.dispose(); // Dispose the player when the page is closed
+    super.dispose();
+  }
+
+  Stream<PositionData> get _positionDataStream => Rx.combineLatest2<Duration, Duration?, PositionData>(
+        _audioPlayer.positionStream,
+        _audioPlayer.durationStream,
+        (position, duration) => PositionData(
+          position,
+          duration ?? Duration.zero,
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +50,7 @@ class OneSurahPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_rounded,color: Colors.black),
+          icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black),
           onPressed: () {
             context.go('/main');
           },
@@ -42,43 +75,112 @@ class OneSurahPage extends StatelessWidget {
             );
           } else if (state is OneSurahLoaded) {
             final surah = state.surah.data;
-            return ListView(
-              padding: const EdgeInsets.all(16.0),
+            return Stack(
               children: [
-                Text('', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                ...surah?.ayahs?.map((ayah) {
-                      return ListTile(
-                        title: Container(
-                            decoration: BoxDecoration(color: Colors.indigo, borderRadius: BorderRadius.circular(13)),
-                            width: width * 0.9,
-                            height: height * 0.04,
-                            child: Row(
-                              children: [
-                                CircleAvatar(
-                                  backgroundColor: Colors.transparent,
-                                  child: Text(
-                                    '${ayah.numberInSurah}',
-                                    style: TextStyle(fontSize: 18, color: Colors.white),
-                                  ),
-                                ),Spacer(),
-                                IconButton(onPressed: ()=>{}, icon: Icon(Icons.ios_share_outlined,color: Colors.white)),
-                                IconButton(onPressed: ()=>{}, icon: Icon(Icons.play_circle_outline_rounded,color: Colors.white)),
-                                IconButton(onPressed: ()=>{}, icon: Icon(Icons.bookmark_border_outlined,color: Colors.white)),
-                              ],
-                            )),
-                        subtitle: Padding(
-                          padding: EdgeInsets.only(top: 8.0),
-                          child: Text(
-                            ayah.text ?? '',
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black87,
+                ListView(
+                  padding: const EdgeInsets.all(16.0),
+                  children: [
+                    Text('', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    ...surah?.ayahs?.map((ayah) {
+                          return ListTile(
+                            title: Container(
+                                decoration: BoxDecoration(color: Colors.indigo, borderRadius: BorderRadius.circular(13)),
+                                width: width * 0.9,
+                                height: height * 0.04,
+                                child: Row(
+                                  children: [
+                                    CircleAvatar(
+                                      backgroundColor: Colors.transparent,
+                                      child: Text(
+                                        '${ayah.numberInSurah}',
+                                        style: TextStyle(fontSize: 18, color: Colors.white),
+                                      ),
+                                    ),
+                                    // Spacer(),
+                                    // IconButton(onPressed: () => {}, icon: Icon(Icons.ios_share_outlined, color: Colors.white)),
+                                    // IconButton(onPressed: () => {}, icon: Icon(Icons.play_circle_outline_rounded, color: Colors.white)),
+                                    // IconButton(onPressed: () => {}, icon: Icon(Icons.bookmark_border_outlined, color: Colors.white)),
+                                  ],
+                                )),
+                            subtitle: Padding(
+                              padding: EdgeInsets.only(top: 8.0),
+                              child: Text(
+                                ayah.text ?? '',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black87,
+                                ),
+                              ),
                             ),
-                          ),
+                          );
+                        }) ??
+                        [],
+                    SizedBox(height: height * .17)
+                  ],
+                ),
+                Positioned(
+                  top: height * .675,
+                  left: width * .05,
+                  right: width * .05,
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.indigo, borderRadius: BorderRadius.circular(45)),
+                    width: width,
+                    height: height * 0.18,
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: width * .1, right: width * .1),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                IconButton(
+                                    onPressed: () => _audioPlayer.seek(
+                                          _audioPlayer.position - Duration(seconds: 10),
+                                        ),
+                                    icon: Icon(Icons.replay_10_outlined, color: Colors.white, size: 40)),
+                                StreamBuilder<PlayerState>(
+                                  stream: _audioPlayer.playerStateStream,
+                                  builder: (context, snapshot) {
+                                    final playerState = snapshot.data;
+                                    final playing = playerState?.playing;
+                                    if (playing != true) {
+                                      return IconButton(
+                                        icon: Icon(Icons.play_circle_outline_outlined, color: Colors.white, size: 80),
+                                        onPressed: _audioPlayer.play,
+                                      );
+                                    } else {
+                                      return IconButton(
+                                        icon: Icon(Icons.pause_circle_outline_outlined, color: Colors.white, size: 80),
+                                        onPressed: _audioPlayer.pause,
+                                      );
+                                    }
+                                  },
+                                ),
+                                IconButton(
+                                    onPressed: () => _audioPlayer.seek(
+                                          _audioPlayer.position + Duration(seconds: 10),
+                                        ),
+                                    icon: Icon(Icons.forward_10_outlined, color: Colors.white, size: 40)),
+                              ],
+                            ),
+                            StreamBuilder<PositionData>(
+                              stream: _positionDataStream,
+                              builder: (context, snapshot) {
+                                final positionData = snapshot.data;
+                                return ProgressBar(
+                                  current: positionData?.position ?? Duration.zero,
+                                  total: positionData?.duration ?? Duration.zero,
+                                  onSeek: (position) => _audioPlayer.seek(position),
+                                );
+                              },
+                            ),
+                          ],
                         ),
-                      );
-                    }) ??
-                    [],
+                      ),
+                    ),
+                  ),
+                ),
               ],
             );
           } else if (state is OneSurahError) {

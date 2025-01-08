@@ -40,7 +40,6 @@ class _QuranPageState extends State<QuranPage> {
                   subtitle: Text('${surah.numberOfAyahs.toString()} ayahs' ?? ''),
                   trailing: Text(surah.name ?? '',style: TextStyle(fontSize: 18),),
                   onTap: () {
-                    // Navigate to OneSurahPage with surah number
                     context.go('/surah/${surah.number}');
                   },
                 );
