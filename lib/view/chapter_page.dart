@@ -25,6 +25,8 @@ class _ChapterPageState extends State<ChapterPage> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(title: Text('Chapters')),
       body: BlocBuilder<ChapterBloc, ChapterState>(
@@ -33,13 +35,21 @@ class _ChapterPageState extends State<ChapterPage> {
             return Center(child: CircularProgressIndicator());
           } else if (state is ChapterLoaded) {
             final chapters = state.chapterModel.chapters;
-            return ListView.builder(
+            return 
+            ListView.builder(
               itemCount: chapters.length,
               itemBuilder: (context, index) {
                 final chapter = chapters[index];
-                return ListTile(
-                  title: Text(chapter.chapterEnglish),
-                  subtitle: Text(chapter.chapterUrdu),
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.grey,borderRadius: BorderRadius.circular(15)),
+                    height: height*.07,
+                    child: ListTile(
+                      title: Text(chapter.chapterEnglish),
+                      subtitle: Text(chapter.chapterUrdu),
+                    ),
+                  ),
                 );
               },
             );

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:islom/models/chapter_mode.dart';
+import 'package:islom/models/chapter_model.dart';
 
 abstract class ChapterState extends Equatable {
   @override

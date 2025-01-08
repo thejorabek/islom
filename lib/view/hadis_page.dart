@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:islom/bloc/chapter_bloc/chapter_bloc.dart';
 import 'package:islom/bloc/chapter_bloc/chapter_event.dart';
-import 'package:islom/bloc/hadith_bloc/hadith_bloc.dart';
-import 'package:islom/bloc/hadith_bloc/hadith_state.dart';
-import 'package:islom/utils/images_list.dart';
+import 'package:islom/bloc/book_bloc/book_bloc.dart';
+import 'package:islom/bloc/book_bloc/book_state.dart';
+import 'package:islom/utils/list.dart';
 import 'package:islom/view/chapter_page.dart';
 import 'package:lottie/lottie.dart';
 
@@ -25,7 +25,7 @@ class _HadisPageState extends State<HadisPage> {
       appBar: AppBar(
         title: Text('Hadith Books', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
       ),
-      body: BlocBuilder<HadithBloc, HadithState>(
+      body: BlocBuilder<BookBloc, BookState>(
         builder: (context, state) {
           if (state is HadithLoading) {
             return Center(
@@ -37,7 +37,7 @@ class _HadisPageState extends State<HadisPage> {
               padding: const EdgeInsets.all(8),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.7,
+                childAspectRatio: 0.67,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
               ),
