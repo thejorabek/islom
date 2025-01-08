@@ -19,13 +19,37 @@ class OneSurahPage extends StatefulWidget {
 
 class _OneSurahPageState extends State<OneSurahPage> {
   late AudioPlayer _audioPlayer;
+  bool _isLoading = false;
+  bool _hasError = false;
 
   @override
   void initState() {
     super.initState();
     _audioPlayer = AudioPlayer();
-    print(widget.surahNumber);
-    _audioPlayer.setUrl('https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${widget.surahNumber}.mp3');
+    _initAudio();
+  }
+
+  Future<void> _initAudio() async {
+    try {
+      // Show loading state while preparing
+      setState(() {
+        _isLoading = true;
+      });
+
+      final url = 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/${widget.surahNumber}.mp3';
+      await _audioPlayer.setUrl(url);
+
+      // Hide loading state after successful preparation
+      setState(() {
+        _isLoading = false;
+      });
+    } catch (e) {
+      print('Error initializing audio: $e');
+      setState(() {
+        _isLoading = false;
+        _hasError = true;
+      });
+    }
   }
 
   @override
@@ -142,12 +166,26 @@ class _OneSurahPageState extends State<OneSurahPage> {
                                 StreamBuilder<PlayerState>(
                                   stream: _audioPlayer.playerStateStream,
                                   builder: (context, snapshot) {
+                                    if (_isLoading) {
+                                      return CircularProgressIndicator(color: Colors.white);
+                                    }
+                                    if (_hasError) {
+                                      return Icon(Icons.error_outline, color: Colors.white, size: 80);
+                                    }
+
                                     final playerState = snapshot.data;
                                     final playing = playerState?.playing;
                                     if (playing != true) {
                                       return IconButton(
                                         icon: Icon(Icons.play_circle_outline_outlined, color: Colors.white, size: 80),
-                                        onPressed: _audioPlayer.play,
+                                        onPressed: () async {
+                                          try {
+                                            await _audioPlayer.play();
+                                          } catch (e) {
+                                            print('Error playing audio: $e');
+                                            setState(() => _hasError = true);
+                                          }
+                                        },
                                       );
                                     } else {
                                       return IconButton(
