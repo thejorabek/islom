@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islom/bloc/time_bloc/time_bloc.dart';
 import 'package:islom/bloc/time_bloc/time_state.dart';
 import 'package:islom/utils/list.dart';
+import 'package:lottie/lottie.dart';
 
 class TimePage extends StatefulWidget {
   const TimePage({super.key});
@@ -19,7 +20,7 @@ class _TimePageState extends State<TimePage> {
     return Scaffold(body: BlocBuilder<PrayerTimeBloc, PrayerTimeState>(
       builder: (context, state) {
         if (state is PrayerTimeLoading) {
-          return Center(child: CircularProgressIndicator());
+          return Center(child: LottieBuilder.asset('assets/lotties/loading.json', width: width * 0.3, height: height * 0.3));
         } else if (state is PrayerTimeLoaded) {
           final prayerTime = state.prayerTime;
           return Stack(
@@ -74,7 +75,7 @@ class _TimePageState extends State<TimePage> {
                                           prayerTime.readableDate,
                                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                                         ),
-                                        Text('12:00 AM')
+                                        Text('12:00 AM',style: TextStyle(fontFamily: 'Quicksand'),)
                                       ],
                                     ),
                                     Spacer(),

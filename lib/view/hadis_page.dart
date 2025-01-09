@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:islom/bloc/chapter_bloc/chapter_bloc.dart';
 import 'package:islom/bloc/chapter_bloc/chapter_event.dart';
 import 'package:islom/bloc/book_bloc/book_bloc.dart';
 import 'package:islom/bloc/book_bloc/book_state.dart';
+import 'package:islom/utils/colors/colors.dart';
 import 'package:islom/utils/list.dart';
 import 'package:islom/view/chapter_page.dart';
 import 'package:lottie/lottie.dart';
@@ -22,8 +22,10 @@ class _HadisPageState extends State<HadisPage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: CustomColors.background,
       appBar: AppBar(
-        title: Text('Hadith Books', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        backgroundColor: CustomColors.background,
+        title: Text('Hadith Books', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontFamily: 'Quicksand')),
       ),
       body: BlocBuilder<BookBloc, BookState>(
         builder: (context, state) {
@@ -34,7 +36,7 @@ class _HadisPageState extends State<HadisPage> {
           } else if (state is HadithLoaded) {
             final books = state.hadith.books;
             return GridView.builder(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(15),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 0.67,
@@ -58,11 +60,11 @@ class _HadisPageState extends State<HadisPage> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: CustomColors.tile,
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
+                          color: Colors.black,
                           spreadRadius: 1,
                           blurRadius: 4,
                           offset: const Offset(0, 2),
@@ -106,7 +108,7 @@ class _HadisPageState extends State<HadisPage> {
                                 Text(
                                   'Writer: ${book.writerName}',
                                   maxLines: 2,
-                                  style: TextStyle(overflow: TextOverflow.ellipsis),
+                                  style: TextStyle(overflow: TextOverflow.ellipsis,fontFamily: 'Quicksand'),
                                 ),
                               ],
                             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islom/utils/colors/colors.dart';
 import 'package:islom/view/dua_page.dart';
 import 'package:islom/view/hadis_page.dart';
 import 'package:islom/view/quran_page.dart';
@@ -30,7 +31,7 @@ class _MainPageState extends State<MainPage> {
         ],
       ),
       bottomNavigationBar: SlidingClippedNavBar(
-        backgroundColor: Colors.white,
+        backgroundColor: CustomColors.background,
         onButtonPressed: (index) {
           setState(() {
             selectedIndex = index;
@@ -38,7 +39,7 @@ class _MainPageState extends State<MainPage> {
           _controller.animateToPage(selectedIndex, duration: const Duration(milliseconds: 400), curve: Curves.easeOutQuad);
         },
         iconSize: 30,
-        activeColor: Color(0xFF01579B),
+        activeColor: Colors.white,
         selectedIndex: selectedIndex,
         barItems: [
           BarItem(

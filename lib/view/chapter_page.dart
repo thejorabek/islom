@@ -28,7 +28,7 @@ class _ChapterPageState extends State<ChapterPage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(title: Text('Chapters')),
+      appBar: AppBar(title: Text('Chapters',style: TextStyle(fontFamily: 'Quicksand'),)),
       body: BlocBuilder<ChapterBloc, ChapterState>(
         builder: (context, state) {
           if (state is ChapterLoading) {
@@ -46,8 +46,8 @@ class _ChapterPageState extends State<ChapterPage> {
                     decoration: BoxDecoration(color: Colors.grey,borderRadius: BorderRadius.circular(15)),
                     height: height*.07,
                     child: ListTile(
-                      title: Text(chapter.chapterEnglish),
-                      subtitle: Text(chapter.chapterUrdu),
+                      title: Text(chapter.chapterEnglish,style: TextStyle(fontFamily: 'Quicksand')),
+                      subtitle: Text(chapter.chapterUrdu,style: TextStyle(fontFamily: 'Quicksand')),
                     ),
                   ),
                 );

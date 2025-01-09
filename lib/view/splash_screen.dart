@@ -16,20 +16,20 @@ class _SplashScreenState extends State<SplashScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: MyDarkColors.backColor,
+      backgroundColor: CustomColors.background,
       body: Padding(
               padding: EdgeInsets.only(left: width * .07, right: width * .07, top: height * .12, bottom: height * .01),
               child: Column(
                 children: [
                   Text(
                     'Quran App',
-                    style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w700),
+                    style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w700,fontFamily: 'Quicksand'),
                   ),
                   SizedBox(height: height * .02),
                   Text(
                     'Learn Quran and\nRecite once everyday',
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: MyDarkColors.greyTextColor, fontSize: 18, fontWeight: FontWeight.w400),
+                    style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w400,fontFamily: 'Quicksand'),
                   ),
                   SizedBox(height: height * .05),
                   SizedBox(
@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       height: height * .7,
                       child: Stack(children: [
                         Container(
-                            decoration: BoxDecoration(color:MyDarkColors.conColor, borderRadius: BorderRadius.circular(30)),
+                            decoration: BoxDecoration(color: CustomColors.tile, borderRadius: BorderRadius.circular(30)),
                             width: width * 1,
                             height: height * .6,
                             child: Stack(
@@ -64,13 +64,13 @@ class _SplashScreenState extends State<SplashScreen> {
                           padding: EdgeInsets.only(left: width * .18, top: height * .56),
                           child: GestureDetector(
                             child: Container(
-                              decoration: BoxDecoration(color: MyDarkColors.getColor, borderRadius: BorderRadius.circular(30)),
+                              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(30)),
                               width: width * .5,
                               height: height * .07,
                               child: Center(
                                   child: Text(
                                 'Get Started',
-                                style: TextStyle(color: Color(0xFF091945), fontSize: 18, fontWeight: FontWeight.w600),
+                                style: TextStyle(color: Color(0xFF091945), fontSize: 18, fontWeight: FontWeight.w600,fontFamily: 'Quicsand'),
                               )),
                             ),
                             onTap: () {

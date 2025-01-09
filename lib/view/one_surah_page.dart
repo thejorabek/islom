@@ -84,7 +84,7 @@ class _OneSurahPageState extends State<OneSurahPage> {
             if (state is OneSurahLoaded) {
               return Text(
                 state.surah.data?.englishName ?? '',
-                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontFamily: 'Quicksand'),
               );
             }
             return Text('');
@@ -104,7 +104,7 @@ class _OneSurahPageState extends State<OneSurahPage> {
                 ListView(
                   padding: const EdgeInsets.all(16.0),
                   children: [
-                    Text('', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    Text('', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,fontFamily: 'Quicksand')),
                     ...surah?.ayahs?.map((ayah) {
                           return ListTile(
                             title: Container(
@@ -117,7 +117,7 @@ class _OneSurahPageState extends State<OneSurahPage> {
                                       backgroundColor: Colors.transparent,
                                       child: Text(
                                         '${ayah.numberInSurah}',
-                                        style: TextStyle(fontSize: 18, color: Colors.white),
+                                        style: TextStyle(fontSize: 18, color: Colors.white,fontFamily: 'Quicksand'),
                                       ),
                                     ),
                                     // Spacer(),
@@ -133,6 +133,7 @@ class _OneSurahPageState extends State<OneSurahPage> {
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.black87,
+                                  fontFamily: 'Quicksand'
                                 ),
                               ),
                             ),
