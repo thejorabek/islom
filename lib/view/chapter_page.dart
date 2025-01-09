@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islom/bloc/chapter_bloc/chapter_bloc.dart';
 import 'package:islom/bloc/chapter_bloc/chapter_state.dart';
+import 'package:islom/utils/colors/colors.dart';
 
 class ChapterPage extends StatefulWidget {
   const ChapterPage({super.key});
@@ -28,26 +29,31 @@ class _ChapterPageState extends State<ChapterPage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(title: Text('Chapters',style: TextStyle(fontFamily: 'Quicksand'),)),
+      backgroundColor: CustomColors.background,
+      appBar: AppBar(
+        title: Text('Chapters', style: TextStyle(fontFamily: 'Quicksand', color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
+        backgroundColor: CustomColors.background,
+        iconTheme: IconThemeData(color: Colors.white),
+      ),
       body: BlocBuilder<ChapterBloc, ChapterState>(
         builder: (context, state) {
           if (state is ChapterLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is ChapterLoaded) {
             final chapters = state.chapterModel.chapters;
-            return 
-            ListView.builder(
+            return ListView.builder(
               itemCount: chapters.length,
               itemBuilder: (context, index) {
                 final chapter = chapters[index];
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    decoration: BoxDecoration(color: Colors.grey,borderRadius: BorderRadius.circular(15)),
-                    height: height*.07,
+                    decoration: BoxDecoration(color: CustomColors.tile, borderRadius: BorderRadius.circular(15)),
+                    height: height * .07,
                     child: ListTile(
-                      title: Text(chapter.chapterEnglish,style: TextStyle(fontFamily: 'Quicksand')),
-                      subtitle: Text(chapter.chapterUrdu,style: TextStyle(fontFamily: 'Quicksand')),
+                      title: Text('${chapter.chapterNumber}. ${chapter.chapterEnglish}',
+                          style: TextStyle(fontFamily: 'Quicksand', color: Colors.white, fontWeight: FontWeight.bold)),
+                      subtitle: Text(chapter.chapterUrdu, style: TextStyle(fontFamily: 'Quicksand', color: Colors.white)),
                     ),
                   ),
                 );

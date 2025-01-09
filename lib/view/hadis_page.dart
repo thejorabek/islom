@@ -22,10 +22,11 @@ class _HadisPageState extends State<HadisPage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
+      
       backgroundColor: CustomColors.background,
       appBar: AppBar(
         backgroundColor: CustomColors.background,
-        title: Text('Hadith Books', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontFamily: 'Quicksand')),
+        title: Text('Hadith Books', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'Quicksand')),
       ),
       body: BlocBuilder<BookBloc, BookState>(
         builder: (context, state) {
@@ -40,8 +41,8 @@ class _HadisPageState extends State<HadisPage> {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 0.67,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
               ),
               itemCount: books.length,
               itemBuilder: (context, index) {
@@ -64,10 +65,10 @@ class _HadisPageState extends State<HadisPage> {
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black,
-                          spreadRadius: 1,
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
+                          color: Colors.black.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
                         ),
                       ],
                     ),
@@ -81,11 +82,12 @@ class _HadisPageState extends State<HadisPage> {
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
+                              color: Colors.white
                             ),
                           ),
                           const SizedBox(height: 8),
                           Container(
-                            height: height * 0.2, // Fixed height for image container
+                            height: height * 0.2,
                             width: width * 0.4,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
@@ -106,9 +108,9 @@ class _HadisPageState extends State<HadisPage> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  'Writer: ${book.writerName}',
-                                  maxLines: 2,
-                                  style: TextStyle(overflow: TextOverflow.ellipsis,fontFamily: 'Quicksand'),
+                                  book.writerName,
+                                  maxLines: 1,
+                                  style: TextStyle(overflow: TextOverflow.ellipsis, fontFamily: 'Quicksand', color: Colors.white, fontSize: 16),
                                 ),
                               ],
                             ),
