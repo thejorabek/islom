@@ -24,6 +24,7 @@ class _HadisPageState extends State<HadisPage> {
     return Scaffold(
       backgroundColor: CustomColors.background,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: CustomColors.background,
         title: Text('Hadith Books', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Quicksand')),
       ),

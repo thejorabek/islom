@@ -6,11 +6,11 @@ class ProgressBar extends StatelessWidget {
   final ValueChanged<Duration> onSeek;
 
   const ProgressBar({
-    Key? key,
+    super.key,
     required this.current,
     required this.total,
     required this.onSeek,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +30,11 @@ class ProgressBar extends StatelessWidget {
           ],
         ),
         Slider(
-
           min: 0.0,
           max: total.inMilliseconds.toDouble(),
           value: current.inMilliseconds.clamp(0, total.inMilliseconds).toDouble(),
           activeColor: const Color(0xFF30638E),
+          // ignore: deprecated_member_use
           inactiveColor: const Color.fromARGB(255, 71, 138, 192).withOpacity(0.3),
           secondaryActiveColor: Colors.white,
           onChanged: (value) {
