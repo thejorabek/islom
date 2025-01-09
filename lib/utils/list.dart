@@ -16,17 +16,22 @@ class ImagesList {
 
 class IconList {
   static const List<Icon> iconList = [
-    // 'assets/images/asr.png',
-    // 'assets/images/dhuhr.png',
-    // 'assets/images/fajr.png',
-    // 'assets/images/maghrib.png',
-    // 'assets/images/sunrise.png',
-    // 'assets/images/isha.png',
-    Icon(Icons.sunny_snowing),
-    Icon(Icons.sunny_snowing),
-    Icon(Icons.sunny_snowing),
-    Icon(Icons.sunny_snowing),
-    Icon(Icons.sunny_snowing),
-    Icon(Icons.sunny_snowing),
+    Icon(Icons.sunny_snowing, color: Colors.white),
+    Icon(Icons.wb_sunny_outlined, color: Colors.white),
+    Icon(Icons.mosque_outlined, color: Colors.white),
+    Icon(Icons.wb_sunny_outlined, color: Colors.white),
+    Icon(Icons.sunny_snowing, color: Colors.white),
+    Icon(Icons.nights_stay_outlined, color: Colors.white),
+  ];
+}
+
+class TimeNames {
+  static const List<String> timeNames = [
+    'Fajr',
+    'Sunrise',
+    'Dhuhr',
+    'Asr',
+    'Maghrib',
+    'Isha',
   ];
 }

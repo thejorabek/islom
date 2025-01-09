@@ -14,7 +14,6 @@ class OneSurahBloc extends Bloc<OneSurahEvent, OneSurahState> {
       LoadOneSurahEvent event, Emitter<OneSurahState> emit) async {
     emit(OneSurahLoading());
     try {
-      // Replace with the actual API endpoint
       final response = await http.get(
         Uri.parse("https://api.alquran.cloud/v1/surah/${event.surahNumber}"),
       );

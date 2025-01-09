@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islom/utils/colors/colors.dart';
 
 class DuaPage extends StatefulWidget {
   const DuaPage({super.key});
@@ -10,6 +11,8 @@ class DuaPage extends StatefulWidget {
 class _DuaPageState extends State<DuaPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      backgroundColor: CustomColors.background,
+    );
   }
 }

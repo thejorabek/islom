@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class ProgressBar extends StatelessWidget {
@@ -21,14 +19,24 @@ class ProgressBar extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(formatDuration(current)),
-            Text(formatDuration(total)),
+            Text(
+              formatDuration(current),
+              style: const TextStyle(color: Colors.white, fontFamily: 'Quicksand', fontWeight: FontWeight.bold),
+            ),
+            Text(
+              formatDuration(total),
+              style: const TextStyle(color: Colors.white, fontFamily: 'Quicksand', fontWeight: FontWeight.bold),
+            ),
           ],
         ),
         Slider(
+
           min: 0.0,
           max: total.inMilliseconds.toDouble(),
           value: current.inMilliseconds.clamp(0, total.inMilliseconds).toDouble(),
+          activeColor: const Color(0xFF30638E),
+          inactiveColor: const Color.fromARGB(255, 71, 138, 192).withOpacity(0.3),
+          secondaryActiveColor: Colors.white,
           onChanged: (value) {
             onSeek(Duration(milliseconds: value.round()));
           },

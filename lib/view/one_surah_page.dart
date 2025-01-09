@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:islom/bloc/surah_bloc/one_surah_bloc.dart';
 import 'package:islom/bloc/surah_bloc/one_surah_state.dart';
 import 'package:islom/service/player_service.dart';
+import 'package:islom/utils/colors/colors.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
 import 'package:rxdart/rxdart.dart';
@@ -36,7 +37,9 @@ class _OneSurahPageState extends State<OneSurahPage> {
         _isLoading = true;
       });
 
-      final url = 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/${widget.surahNumber}.mp3';
+      // Format surah number with leading zeros
+      final formattedNumber = widget.surahNumber.toString().padLeft(3, '0');
+      final url = 'https://server8.mp3quran.net/afs/$formattedNumber.mp3';
       await _audioPlayer.setUrl(url);
 
       // Hide loading state after successful preparation
@@ -72,24 +75,22 @@ class _OneSurahPageState extends State<OneSurahPage> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: CustomColors.background,
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black),
-          onPressed: () {
-            context.go('/main');
-          },
-        ),
+        backgroundColor: CustomColors.background,
+        iconTheme: IconThemeData(color: Colors.white),
         title: BlocBuilder<OneSurahBloc, OneSurahState>(
           builder: (context, state) {
             if (state is OneSurahLoaded) {
               return Text(
                 state.surah.data?.englishName ?? '',
-                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontFamily: 'Quicksand'),
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Quicksand'),
               );
             }
             return Text('');
           },
         ),
+        leading: IconButton(onPressed: () => context.go('/main'), icon: Icon(Icons.arrow_back_ios_new_outlined)),
       ),
       body: BlocBuilder<OneSurahBloc, OneSurahState>(
         builder: (context, state) {
@@ -104,11 +105,11 @@ class _OneSurahPageState extends State<OneSurahPage> {
                 ListView(
                   padding: const EdgeInsets.all(16.0),
                   children: [
-                    Text('', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,fontFamily: 'Quicksand')),
+                    Text('', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'Quicksand', color: Colors.white)),
                     ...surah?.ayahs?.map((ayah) {
                           return ListTile(
                             title: Container(
-                                decoration: BoxDecoration(color: Colors.indigo, borderRadius: BorderRadius.circular(13)),
+                                decoration: BoxDecoration(color: CustomColors.tile, borderRadius: BorderRadius.circular(13)),
                                 width: width * 0.9,
                                 height: height * 0.04,
                                 child: Row(
@@ -117,7 +118,7 @@ class _OneSurahPageState extends State<OneSurahPage> {
                                       backgroundColor: Colors.transparent,
                                       child: Text(
                                         '${ayah.numberInSurah}',
-                                        style: TextStyle(fontSize: 18, color: Colors.white,fontFamily: 'Quicksand'),
+                                        style: TextStyle(fontSize: 18, color: Colors.white, fontFamily: 'Quicksand'),
                                       ),
                                     ),
                                     // Spacer(),
@@ -130,11 +131,7 @@ class _OneSurahPageState extends State<OneSurahPage> {
                               padding: EdgeInsets.only(top: 8.0),
                               child: Text(
                                 ayah.text ?? '',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black87,
-                                  fontFamily: 'Quicksand'
-                                ),
+                                style: TextStyle(fontSize: 23, color: Colors.white, fontFamily: 'Quicksand'),
                               ),
                             ),
                           );
@@ -148,7 +145,7 @@ class _OneSurahPageState extends State<OneSurahPage> {
                   left: width * .05,
                   right: width * .05,
                   child: Container(
-                    decoration: BoxDecoration(color: Colors.indigo, borderRadius: BorderRadius.circular(45)),
+                    decoration: BoxDecoration(color: CustomColors.tile, borderRadius: BorderRadius.circular(45)),
                     width: width,
                     height: height * 0.18,
                     child: Center(
@@ -173,7 +170,6 @@ class _OneSurahPageState extends State<OneSurahPage> {
                                     if (_hasError) {
                                       return Icon(Icons.error_outline, color: Colors.white, size: 80);
                                     }
-
                                     final playerState = snapshot.data;
                                     final playing = playerState?.playing;
                                     if (playing != true) {

@@ -22,11 +22,10 @@ class _HadisPageState extends State<HadisPage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      
       backgroundColor: CustomColors.background,
       appBar: AppBar(
         backgroundColor: CustomColors.background,
-        title: Text('Hadith Books', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'Quicksand')),
+        title: Text('Hadith Books', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Quicksand')),
       ),
       body: BlocBuilder<BookBloc, BookState>(
         builder: (context, state) {

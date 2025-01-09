@@ -19,7 +19,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     PageController _controller = PageController();
     return Scaffold(
-      backgroundColor: Colors.indigo,
+      backgroundColor: CustomColors.background,
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: _controller,
