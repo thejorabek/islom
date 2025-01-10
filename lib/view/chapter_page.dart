@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:islom/bloc/chapter_bloc/chapter_bloc.dart';
 import 'package:islom/bloc/chapter_bloc/chapter_state.dart';
 import 'package:islom/utils/colors/colors.dart';
@@ -35,6 +36,7 @@ class _ChapterPageState extends State<ChapterPage> {
         title: Text('Chapters', style: TextStyle(fontFamily: 'Quicksand', color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
         backgroundColor: CustomColors.background,
         iconTheme: IconThemeData(color: Colors.white),
+        leading: IconButton(onPressed: ()=>{context.push('/hadith')}, icon: Icon(Icons.arrow_back_ios_new_outlined)),
       ),
       body: BlocBuilder<ChapterBloc, ChapterState>(
         builder: (context, state) {

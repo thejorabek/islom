@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:islom/bloc/surah_bloc/one_surah_bloc.dart';
 import 'package:islom/bloc/surah_bloc/one_surah_event.dart';
+import 'package:islom/view/hadis_page.dart';
 import 'package:islom/view/main_page.dart';
 import 'package:islom/view/one_surah_page.dart';
 import 'package:islom/view/splash_screen.dart';
@@ -18,6 +19,11 @@ final router = GoRouter(
       name: 'main',
       path: '/main',
       builder: (context, state) => MainPage(),
+    ),
+    GoRoute(
+      name: 'hadith',
+      path: '/hadith',
+      builder: (context, state) => HadisPage(),
     ),
     GoRoute(
           path: '/surah/:number',

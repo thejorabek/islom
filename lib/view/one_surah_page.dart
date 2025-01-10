@@ -90,7 +90,7 @@ class _OneSurahPageState extends State<OneSurahPage> {
             return Text('');
           },
         ),
-        leading: IconButton(onPressed: () => context.go('/main'), icon: Icon(Icons.arrow_back_ios_new_outlined)),
+        leading: IconButton(onPressed: () => context.push('/main'), icon: Icon(Icons.arrow_back_ios_new_outlined)),
       ),
       body: BlocBuilder<OneSurahBloc, OneSurahState>(
         builder: (context, state) {

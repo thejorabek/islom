@@ -1,3 +1,4 @@
+import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:circular_countdown/circular_countdown.dart';
@@ -5,6 +6,8 @@ import 'package:islom/bloc/counter_bloc/counter_bloc.dart';
 import 'package:islom/bloc/counter_bloc/counter_event.dart';
 import 'package:islom/bloc/counter_bloc/counter_state.dart';
 import 'package:islom/utils/colors/colors.dart';
+import 'package:islom/utils/list.dart';
+import 'package:wheel_chooser/wheel_chooser.dart';
 
 class DuaPage extends StatelessWidget {
   const DuaPage({super.key});
@@ -19,6 +22,32 @@ class DuaPage extends StatelessWidget {
             double height = MediaQuery.of(context).size.height;
             return Stack(
               children: [
+                Positioned(
+                  top: height * .09,
+                  left: width * .07,
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: CustomColors.tile),
+                    width: width * .85,
+                    height: height * .3,
+                    child: Center(
+                      child: Column(
+                        children: [
+                          SizedBox(height: height * .02),
+                          Text(
+                            DuaList.duaList[7],
+                            style: TextStyle(color: Colors.white, fontSize: 26),
+                          ),
+                          SizedBox(height: height * .02),
+                          Text(
+                            DuaList.duaTranslation[7],
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
                 Center(
                   child: GestureDetector(
                     onTap: state.remaining > 0
@@ -27,7 +56,7 @@ class DuaPage extends StatelessWidget {
                           }
                         : null,
                     child: Padding(
-                      padding: const EdgeInsets.all(40),
+                      padding: EdgeInsets.only(top: height * .32, left: width * .1, right: width * .1),
                       child: CircularCountdown(
                         countdownTotal: 30,
                         countdownRemaining: state.remaining,
@@ -38,30 +67,43 @@ class DuaPage extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                    top: height * .34,
-                    left: state.remaining >= 10 ? width * .32 : width * .40,
+                    top: height * .49,
+                    left: state.remaining >= 10 ? width * .29 : width * .40,
                     child: GestureDetector(
-                      onTap: state.remaining > 0
-                          ? () {
-                              context.read<CountdownBloc>().add(DecrementCountdown());
-                            }
-                          : null,
-                      child: Text(
-                        '${state.remaining}',
-                        style: TextStyle(
-                          fontFamily: 'Quicksand',
-                          fontSize: 135,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )),
+                        onTap: state.remaining > 0
+                            ? () {
+                                context.read<CountdownBloc>().add(DecrementCountdown());
+                              }
+                            : null,
+                        child: AnimatedFlipCounter(
+                          value: state.remaining,
+                          textStyle: TextStyle(
+                            fontFamily: 'Quicksand',
+                            fontSize: 135,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ))),
                 Positioned(
-                    top: height * .73,
-                    left: width * .44,
-                    child: IconButton(
-                        onPressed: () => {context.read<CountdownBloc>().add(ResetCountdown())},
-                        icon: Icon(Icons.refresh_rounded, color: Colors.white, size: 50)))
+                  top: height * .78,
+                  left: width * .1,
+                  child: SizedBox(
+                    width: width * .8, // Adjust this value as needed
+                    height: height * .15, // Adjust this value as needed
+                    child: WheelChooser.integer(
+                      reverse: true,
+                      horizontal: true,
+                      onValueChanged: (c) => context.read<CountdownBloc>().add(DecrementCountdown()),
+                      maxValue: 30,
+                      minValue: 0,
+                      selectTextStyle: TextStyle(fontFamily: 'Quicksand', fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+                      unSelectTextStyle: TextStyle(color: Colors.grey,fontSize: 15),
+                    ),
+                  ),
+                )
+                // IconButton(
+                //     onPressed: () => {context.read<CountdownBloc>().add(ResetCountdown())},
+                //     icon: Icon(Icons.refresh_rounded, color: Colors.white, size: 50)))
               ],
             );
           },

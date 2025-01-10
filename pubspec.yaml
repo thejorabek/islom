@@ -24,6 +24,8 @@ dependencies:
   just_audio: ^0.9.42
   rxdart: ^0.28.0
   circular_countdown: ^2.1.0
+  animated_flip_counter: ^0.3.4
+  wheel_chooser: ^1.1.2
 
 dev_dependencies:
   flutter_test:

@@ -59,7 +59,7 @@ class _QuranPageState extends State<QuranPage> {
                       style: TextStyle(fontSize: 18, fontFamily: 'Quicksand', color: Colors.white),
                     ),
                     onTap: () {
-                      context.go('/surah/${surah.number}');
+                      context.push('/surah/${surah.number}');
                     },
                   ),
                 ),

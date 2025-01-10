@@ -35,3 +35,29 @@ class TimeNames {
     'Isha',
   ];
 }
+
+class DuaList {
+  static const List<String> duaList = [
+    'لَا إِلٰهَ إِلَّا اللّٰهُ',
+    'سُبْحَانَ اللّٰهِ ، اَلْحَمْدُ لِلّٰهِ ، اَللّٰهُ أَكْبَرُ',
+    'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللّٰهِ',
+    'لَا إِلٰهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيْكَ لَهُ ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيْرٌ',
+    'سُبْحَانَ اللهِ ، وَالْحَمْدُ لِلهِ وَلَا إِلٰهَ إِلَّا اللهُ ، وَاللهُ أَكْبَرُ.',
+    'سُبْحَانَ اللهِ وَبِحَمْدِهِ ، سُبْحَانَ اللهِ الْعَظِيْم',
+    'يَا حَيُّ يَا قَيُّوْمُ ، بِرَحْمَتِكَ أَسْتَغِيْثُ',
+    'لَآ إِلٰهَ إِلَّآ أَنْتَ سُبۡحٰنَكَ إِنِّيْ كُنْتُ مِنَ الظّٰلِمِيْنَ',
+    'أَسْتَغْفِرُ اللهَ الْعَظِيْمَ الَّذِيْ لَا إِلٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّوْمُ ، وَأَتُوْبُ إِلَيْهِ'
+  ];
+
+  static const List<String> duaTranslation = [
+    'There is no god but Allah',
+    'Allah is free from imperfection. All praise be to Allah. Allah is the Greatest',
+    'There is no power (in averting evil) or strength (in attaining good) except through Allah',
+    'There is no god but Allah. He is Alone and He has no partner whatsoever. To Him Alone belong all sovereignty and all praise. He is over all things All-Powerful',
+    'Allah is free from imperfection. All praise be to Allah. There is no god worthy of worship but Allah. Allah is the Greatest',
+    'Allah is free from imperfection and all praise is due to Him, Allah is free from imperfection, the Greatest',
+    'O The Ever Living, The One Who sustains and protects all that exists; I seek assistance through Your Mercy',
+    'There is no god worthy of worship except You; You are free from all imperfection. Indeed, I have been of the wrongdoers',
+    'I seek forgiveness from Allah, the Greatest, whom there is none worthy of worship except Him, The Ever Living, The One Who sustains and protects all that exists, I turn in repentance towards you'
+  ];
+}
