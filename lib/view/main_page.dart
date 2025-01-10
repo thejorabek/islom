@@ -14,7 +14,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  @override
   int selectedIndex = 0;
   Widget build(BuildContext context) {
     PageController _controller = PageController();

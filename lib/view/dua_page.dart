@@ -62,6 +62,7 @@ class DuaPage extends StatelessWidget {
                         countdownRemaining: state.remaining,
                         countdownCurrentColor: state.currentColor,
                         strokeWidth: width * .07,
+                        diameter: width * .75,
                       ),
                     ),
                   ),
@@ -84,15 +85,18 @@ class DuaPage extends StatelessWidget {
                             color: Colors.white,
                           ),
                         ))),
-                Positioned(
-                    top: height * .78,
-                    left: width * .1,
-                    child: SizedBox(
-                        width: width * .8, // Adjust this value as needed
-                        height: height * .15, // Adjust this value as needed
-                        child: IconButton(
-                            onPressed: () => {context.read<CountdownBloc>().add(ResetCountdown())},
-                            icon: Icon(Icons.refresh_rounded, color: Colors.white, size: 50)))),
+                Visibility(
+                  visible: state.remaining == 0,
+                  child: Positioned(
+                      top: height * .78,
+                      left: width * .1,
+                      child: SizedBox(
+                          width: width * .8, // Adjust this value as needed
+                          height: height * .15, // Adjust this value as needed
+                          child: IconButton(
+                              onPressed: () => {context.read<CountdownBloc>().add(ResetCountdown())},
+                              icon: Icon(Icons.refresh_rounded, color: Colors.white, size: 50)))),
+                ),
               ],
             );
           },
