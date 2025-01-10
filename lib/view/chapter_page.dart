@@ -49,11 +49,16 @@ class _ChapterPageState extends State<ChapterPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     decoration: BoxDecoration(color: CustomColors.tile, borderRadius: BorderRadius.circular(15)),
-                    height: height * .07,
                     child: ListTile(
-                      title: Text('${chapter.chapterNumber}. ${chapter.chapterEnglish}',
-                          style: TextStyle(fontFamily: 'Quicksand', color: Colors.white, fontWeight: FontWeight.bold)),
-                      subtitle: Text(chapter.chapterUrdu, style: TextStyle(fontFamily: 'Quicksand', color: Colors.white)),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      title: Text(
+                        '${chapter.chapterNumber}. ${chapter.chapterEnglish}',
+                        style: TextStyle(fontFamily: 'Quicksand', color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(
+                        chapter.chapterUrdu,
+                        style: TextStyle(fontFamily: 'Quicksand', color: Colors.white,fontSize: 18),
+                      ),
                     ),
                   ),
                 );

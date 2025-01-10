@@ -6,7 +6,6 @@ import 'package:islom/view/main_page.dart';
 import 'package:islom/view/one_surah_page.dart';
 import 'package:islom/view/splash_screen.dart';
 
-// GoRouter configuration
 final router = GoRouter(
   initialLocation: '/',
   routes: [

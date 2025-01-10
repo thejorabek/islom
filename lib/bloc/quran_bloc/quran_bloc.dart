@@ -13,7 +13,6 @@ class SurahBloc extends Bloc<SurahEvent, SurahState> {
   Future<void> _onLoadSurahList(LoadSurahListEvent event, Emitter<SurahState> emit) async {
     emit(SurahLoading());
     try {
-      // Replace with the actual API endpoint
       final response = await http.get(
         Uri.parse("https://api.alquran.cloud/v1/surah"),
       );
