@@ -141,13 +141,13 @@ class _OneSurahPageState extends State<OneSurahPage> {
                   ],
                 ),
                 Positioned(
-                  top: height * .675,
+                  top: height * .65,
                   left: width * .05,
                   right: width * .05,
                   child: Container(
                     decoration: BoxDecoration(color: CustomColors.tile, borderRadius: BorderRadius.circular(45)),
                     width: width,
-                    height: height * 0.18,
+                    height: height * 0.19,
                     child: Center(
                       child: Padding(
                         padding: EdgeInsets.only(left: width * .1, right: width * .1),

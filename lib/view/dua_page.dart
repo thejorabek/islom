@@ -85,25 +85,14 @@ class DuaPage extends StatelessWidget {
                           ),
                         ))),
                 Positioned(
-                  top: height * .78,
-                  left: width * .1,
-                  child: SizedBox(
-                    width: width * .8, // Adjust this value as needed
-                    height: height * .15, // Adjust this value as needed
-                    child: WheelChooser.integer(
-                      reverse: true,
-                      horizontal: true,
-                      onValueChanged: (c) => context.read<CountdownBloc>().add(DecrementCountdown()),
-                      maxValue: 30,
-                      minValue: 0,
-                      selectTextStyle: TextStyle(fontFamily: 'Quicksand', fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
-                      unSelectTextStyle: TextStyle(color: Colors.grey,fontSize: 15),
-                    ),
-                  ),
-                )
-                // IconButton(
-                //     onPressed: () => {context.read<CountdownBloc>().add(ResetCountdown())},
-                //     icon: Icon(Icons.refresh_rounded, color: Colors.white, size: 50)))
+                    top: height * .78,
+                    left: width * .1,
+                    child: SizedBox(
+                        width: width * .8, // Adjust this value as needed
+                        height: height * .15, // Adjust this value as needed
+                        child: IconButton(
+                            onPressed: () => {context.read<CountdownBloc>().add(ResetCountdown())},
+                            icon: Icon(Icons.refresh_rounded, color: Colors.white, size: 50)))),
               ],
             );
           },
