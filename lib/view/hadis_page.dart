@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:islom/bloc/chapter_bloc/chapter_bloc.dart';
 import 'package:islom/bloc/chapter_bloc/chapter_event.dart';
 import 'package:islom/bloc/book_bloc/book_bloc.dart';
@@ -27,6 +28,7 @@ class _HadisPageState extends State<HadisPage> {
         centerTitle: true,
         backgroundColor: CustomColors.background,
         title: Text('Hadith Books', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Quicksand')),
+        leading: IconButton(onPressed: () => context.push('/main'), icon: Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white)),
       ),
       body: BlocBuilder<BookBloc, BookState>(
         builder: (context, state) {
@@ -79,11 +81,7 @@ class _HadisPageState extends State<HadisPage> {
                         children: [
                           Text(
                             book.bookName,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white
-                            ),
+                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                           ),
                           const SizedBox(height: 8),
                           Container(

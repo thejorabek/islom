@@ -90,8 +90,8 @@ class DuaPage extends StatelessWidget {
                       top: height * .78,
                       left: width * .1,
                       child: SizedBox(
-                          width: width * .8, // Adjust this value as needed
-                          height: height * .15, // Adjust this value as needed
+                          width: width * .8,
+                          height: height * .15,
                           child: IconButton(
                               onPressed: () => {context.read<CountdownBloc>().add(ResetCountdown())},
                               icon: Icon(Icons.refresh_rounded, color: Colors.white, size: 50)))),
