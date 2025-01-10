@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   SizedBox(height: height * .05),
                   SizedBox(
                       width: width * 1,
-                      height: height * .7,
+                      height: height * .68,
                       child: Stack(children: [
                         Container(
                             decoration: BoxDecoration(color: CustomColors.tile, borderRadius: BorderRadius.circular(30)),

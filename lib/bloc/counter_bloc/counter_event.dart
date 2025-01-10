@@ -8,3 +8,5 @@ abstract class CountdownEvent extends Equatable {
 }
 
 class DecrementCountdown extends CountdownEvent {}
+
+class ResetCountdown extends CountdownEvent {}

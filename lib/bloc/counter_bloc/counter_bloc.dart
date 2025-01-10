@@ -13,5 +13,12 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
         ));
       }
     });
+
+    on<ResetCountdown>((event, emit) {
+      emit(state.copyWith(
+        remaining: 30,
+        currentColor: CustomColors.tile,
+      ));
+    });
   }
 }

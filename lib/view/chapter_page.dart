@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islom/bloc/chapter_bloc/chapter_bloc.dart';
 import 'package:islom/bloc/chapter_bloc/chapter_state.dart';
 import 'package:islom/utils/colors/colors.dart';
+import 'package:lottie/lottie.dart';
 
 class ChapterPage extends StatefulWidget {
   const ChapterPage({super.key});
@@ -38,7 +39,7 @@ class _ChapterPageState extends State<ChapterPage> {
       body: BlocBuilder<ChapterBloc, ChapterState>(
         builder: (context, state) {
           if (state is ChapterLoading) {
-            return Center(child: CircularProgressIndicator());
+            return Center(child: LottieBuilder.asset('assets/lotties/loading.json', width: width * 0.3, height: height * 0.3));
           } else if (state is ChapterLoaded) {
             final chapters = state.chapterModel.chapters;
             return ListView.builder(

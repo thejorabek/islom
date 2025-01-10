@@ -11,15 +11,12 @@ class DuaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => CountdownBloc(),
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: CustomColors.background,
         body: BlocBuilder<CountdownBloc, CountdownState>(
           builder: (context, state) {
             double width = MediaQuery.of(context).size.width;
             double height = MediaQuery.of(context).size.height;
-
             return Stack(
               children: [
                 Center(
@@ -41,8 +38,8 @@ class DuaPage extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                    top: height * .35,
-                    left: width * .32,
+                    top: height * .34,
+                    left: state.remaining >= 10 ? width * .32 : width * .40,
                     child: GestureDetector(
                       onTap: state.remaining > 0
                           ? () {
@@ -59,11 +56,15 @@ class DuaPage extends StatelessWidget {
                         ),
                       ),
                     )),
+                Positioned(
+                    top: height * .73,
+                    left: width * .44,
+                    child: IconButton(
+                        onPressed: () => {context.read<CountdownBloc>().add(ResetCountdown())},
+                        icon: Icon(Icons.refresh_rounded, color: Colors.white, size: 50)))
               ],
             );
           },
-        ),
-      ),
-    );
+        ));
   }
 }
