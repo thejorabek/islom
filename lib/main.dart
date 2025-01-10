@@ -46,8 +46,16 @@ class MyApp extends StatelessWidget {
           create: (context) => ChapterBloc(),
           child: ChapterPage(),
         ),
-        BlocProvider(create: (context) => PrayerTimeBloc()..add(LoadPrayerTimeEvent(address: address, date: date))),
-        BlocProvider(create: (context) => CountdownBloc(), child: DuaPage())
+        BlocProvider(
+          create: (context) => PrayerTimeBloc()
+            ..add(
+              LoadPrayerTimeEvent(address: address, date: date),
+            ),
+        ),
+        BlocProvider(
+          create: (context) => CountdownBloc(),
+          child: DuaPage(),
+        )
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
