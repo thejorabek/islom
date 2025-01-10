@@ -25,7 +25,8 @@ dependencies:
   rxdart: ^0.28.0
   circular_countdown: ^2.1.0
   animated_flip_counter: ^0.3.4
-  wheel_slider: ^1.2.2
+  geolocator: ^13.0.2
+  geocoding: ^3.0.0
 
 dev_dependencies:
   flutter_test:

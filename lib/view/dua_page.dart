@@ -7,7 +7,6 @@ import 'package:islom/bloc/counter_bloc/counter_event.dart';
 import 'package:islom/bloc/counter_bloc/counter_state.dart';
 import 'package:islom/utils/colors/colors.dart';
 import 'package:islom/utils/list.dart';
-import 'package:wheel_chooser/wheel_chooser.dart';
 
 class DuaPage extends StatelessWidget {
   const DuaPage({super.key});

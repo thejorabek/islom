@@ -14,6 +14,11 @@ class TimePage extends StatefulWidget {
 }
 
 class _TimePageState extends State<TimePage> {
+  String formatTimezone(String timezone) {
+    final location = timezone.split('/').last;
+    return location.replaceAll('_', ' ');
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -33,11 +38,29 @@ class _TimePageState extends State<TimePage> {
                   ),
                   Positioned(
                     top: height * 0.1,
-                    left: width * .27,
-                    right: width * 0,
+                    right: width * .24,
                     bottom: height * 0.55,
-                    child: Text(prayerTime.readableDate,
-                        style: TextStyle(fontFamily: 'Quicksand', color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold)),
+                    child: Column(
+                      children: [
+                        Text(prayerTime.data.date.readable,
+                            style: TextStyle(fontFamily: 'Quicksand', color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold)),
+                        Text(
+                          '${prayerTime.data.date.hijri.weekday.ar} - ${prayerTime.data.date.gregorian.weekday.en}',
+                          style: TextStyle(fontFamily: 'Quicksand', color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: height * .05),
+                        Row(
+                          children: [
+                            Icon(Icons.location_on_rounded, size: 30, color: Colors.white),
+                            SizedBox(width: width * .05),
+                            Text(
+                              formatTimezone(prayerTime.data.meta.timezone),
+                              style: TextStyle(fontFamily: 'Quicksand', fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                   Positioned(
                     top: height * .32,
@@ -73,7 +96,7 @@ class _TimePageState extends State<TimePage> {
                                               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
                                             ),
                                             Text(
-                                              '12:00 AM',
+                                              state.prayerTime.data.timings.asr,
                                               style: TextStyle(fontFamily: 'Quicksand', color: Colors.white),
                                             )
                                           ],
