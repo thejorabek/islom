@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islom/models/time_model.dart';
 
 class ImagesList {
   static const List<String> imageList = [
@@ -60,4 +61,25 @@ class DuaList {
     'There is no god worthy of worship except You; You are free from all imperfection. Indeed, I have been of the wrongdoers',
     'I seek forgiveness from Allah, the Greatest, whom there is none worthy of worship except Him, The Ever Living, The One Who sustains and protects all that exists, I turn in repentance towards you'
   ];
+}
+
+class GetTimes {
+  static String getTiming(Timings timings, String timeName) {
+    switch (timeName.toLowerCase()) {
+      case 'fajr':
+        return timings.fajr;
+      case 'sunrise':
+        return timings.sunrise;
+      case 'dhuhr':
+        return timings.dhuhr;
+      case 'asr':
+        return timings.asr;
+      case 'maghrib':
+        return timings.maghrib;
+      case 'isha':
+        return timings.isha;
+      default:
+        return 'N/A';
+    }
+  }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islom/bloc/time_bloc/time_bloc.dart';
 import 'package:islom/bloc/time_bloc/time_state.dart';
+import 'package:islom/models/time_model.dart';
 import 'package:islom/utils/colors/colors.dart';
 import 'package:islom/utils/list.dart';
 import 'package:lottie/lottie.dart';
@@ -96,7 +97,7 @@ class _TimePageState extends State<TimePage> {
                                               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
                                             ),
                                             Text(
-                                              state.prayerTime.data.timings.asr,
+                                              GetTimes.getTiming(prayerTime.data.timings, TimeNames.timeNames[index]),
                                               style: TextStyle(fontFamily: 'Quicksand', color: Colors.white),
                                             )
                                           ],

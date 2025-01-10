@@ -55,7 +55,7 @@ class PrayerTimeBloc extends Bloc<PrayerTimeEvent, PrayerTimeState> {
       print(date);
       print(location);
       final url = "https://api.aladhan.com/v1/timingsByAddress/$date?address=$location&method=6";
-
+      
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
