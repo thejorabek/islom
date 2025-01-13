@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:islom/bloc/dua_bloc/dua_bloc.dart';
+import 'package:islom/bloc/dua_bloc/dua_event.dart';
 import 'package:islom/utils/colors/colors.dart';
 import 'package:islom/utils/list.dart';
 
@@ -24,28 +27,40 @@ class DuaHelperPage extends StatelessWidget {
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.all(16),
-              child: Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: CustomColors.tile),
-                width: width * .85,
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min, // Makes column wrap its content
-                    children: [
-                      SizedBox(height: height * .02),
-                      Text(
-                        DuaList.duaList[index],
-                        style: TextStyle(color: Colors.white, fontSize: 26),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: height * .02),
-                      Text(
-                        DuaList.duaTranslation[index],
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: height * .02),
-                    ],
+              child: GestureDetector(
+                onTap: () {
+                  context.read<DuaBloc>().add(
+                        SelectDuaEvent(
+                          dua: DuaList.duaList[index],
+                          translation: DuaList.duaTranslation[index],
+                          index: index,
+                        ),
+                      );
+                  context.push('/dua');
+                },
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: CustomColors.tile),
+                  width: width * .85,
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min, // Makes column wrap its content
+                      children: [
+                        SizedBox(height: height * .02),
+                        Text(
+                          DuaList.duaList[index],
+                          style: TextStyle(color: Colors.white, fontSize: 26),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: height * .02),
+                        Text(
+                          DuaList.duaTranslation[index],
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: height * .02),
+                      ],
+                    ),
                   ),
                 ),
               ),

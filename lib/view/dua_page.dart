@@ -6,6 +6,8 @@ import 'package:go_router/go_router.dart';
 import 'package:islom/bloc/counter_bloc/counter_bloc.dart';
 import 'package:islom/bloc/counter_bloc/counter_event.dart';
 import 'package:islom/bloc/counter_bloc/counter_state.dart';
+import 'package:islom/bloc/dua_bloc/dua_bloc.dart';
+import 'package:islom/bloc/dua_bloc/dua_state.dart';
 import 'package:islom/utils/colors/colors.dart';
 import 'package:islom/utils/list.dart';
 
@@ -26,26 +28,53 @@ class DuaPage extends StatelessWidget {
                   top: height * .09,
                   left: width * .07,
                   child: GestureDetector(
-                    onTap: ()=>context.push('/dua_helper'),
+                    onTap: () => context.push('/dua_helper'),
                     child: Container(
                       padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: CustomColors.tile),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30), 
+                        color: CustomColors.tile
+                      ),
                       width: width * .85,
-                      height: height * .3,
                       child: Center(
-                        child: Column(
-                          children: [
-                            SizedBox(height: height * .02),
-                            Text(
-                              DuaList.duaList[7],
-                              style: TextStyle(color: Colors.white, fontSize: 26),
-                            ),
-                            SizedBox(height: height * .02),
-                            Text(
-                              DuaList.duaTranslation[7],
-                              style: TextStyle(color: Colors.white, fontSize: 16),
-                            ),
-                          ],
+                        child: BlocBuilder<DuaBloc, DuaState>(
+                          builder: (context, state) {
+                            if (state is DuaSelected) {
+                              return Column(
+                                children: [
+                                  SizedBox(height: height * .02),
+                                  Text(
+                                    state.dua,
+                                    style: TextStyle(color: Colors.white, fontSize: 26),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  SizedBox(height: height * .02),
+                                  Text(
+                                    state.translation,
+                                    style: TextStyle(color: Colors.white, fontSize: 16),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              );
+                            }
+                            // Default/Initial state
+                            return Column(
+                              children: [
+                                SizedBox(height: height * .02),
+                                Text(
+                                  DuaList.duaList[0],
+                                  style: TextStyle(color: Colors.white, fontSize: 26),
+                                  textAlign: TextAlign.center,
+                                ),
+                                SizedBox(height: height * .02),
+                                Text(
+                                  DuaList.duaTranslation[0],
+                                  style: TextStyle(color: Colors.white, fontSize: 16),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            );
+                          },
                         ),
                       ),
                     ),

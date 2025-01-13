@@ -4,6 +4,7 @@ import 'package:islom/bloc/chapter_bloc/chapter_bloc.dart';
 import 'package:islom/bloc/book_bloc/book_bloc.dart';
 import 'package:islom/bloc/book_bloc/book_event.dart';
 import 'package:islom/bloc/counter_bloc/counter_bloc.dart';
+import 'package:islom/bloc/dua_bloc/dua_bloc.dart';
 import 'package:islom/bloc/quran_bloc/quran_bloc.dart';
 import 'package:islom/bloc/quran_bloc/quran_event.dart';
 import 'package:islom/bloc/surah_bloc/one_surah_bloc.dart';
@@ -11,6 +12,7 @@ import 'package:islom/bloc/time_bloc/time_bloc.dart';
 import 'package:islom/bloc/time_bloc/time_event.dart';
 import 'package:islom/utils/router/router.dart';
 import 'package:islom/view/chapter_page.dart';
+import 'package:islom/view/dua_helper_page.dart';
 import 'package:islom/view/dua_page.dart';
 import 'package:islom/view/hadis_page.dart';
 import 'package:islom/view/one_surah_page.dart';
@@ -55,6 +57,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => CountdownBloc(),
           child: DuaPage(),
+        ),
+        BlocProvider(
+          create: (context) => DuaBloc(),
+          child: DuaHelperPage(),
         )
       ],
       child: MaterialApp.router(
