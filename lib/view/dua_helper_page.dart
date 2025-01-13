@@ -19,33 +19,38 @@ class DuaHelperPage extends StatelessWidget {
         leading: IconButton(onPressed: () => context.push('/dua'), icon: Icon(Icons.arrow_back_ios_new_outlined)),
         iconTheme: IconThemeData(color: Colors.white),
       ),
-      body: ListView.builder(itemCount: DuaList.duaList.length,itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.all(16),
-          child: Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: CustomColors.tile),
-            width: width * .85,
-            height: height * .3,
-            child: Center(
-              child: Column(
-                children: [
-                  SizedBox(height: height * .02),
-                  Text(
-                    DuaList.duaList[index],
-                    style: TextStyle(color: Colors.white, fontSize: 26),
+      body: ListView.builder(
+          itemCount: DuaList.duaList.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.all(16),
+              child: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: CustomColors.tile),
+                width: width * .85,
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min, // Makes column wrap its content
+                    children: [
+                      SizedBox(height: height * .02),
+                      Text(
+                        DuaList.duaList[index],
+                        style: TextStyle(color: Colors.white, fontSize: 26),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: height * .02),
+                      Text(
+                        DuaList.duaTranslation[index],
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: height * .02),
+                    ],
                   ),
-                  SizedBox(height: height * .02),
-                  Text(
-                    DuaList.duaTranslation[index],
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
-        );
-      }),
+            );
+          }),
     );
   }
 }
