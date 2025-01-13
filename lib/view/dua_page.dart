@@ -2,6 +2,7 @@ import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:circular_countdown/circular_countdown.dart';
+import 'package:go_router/go_router.dart';
 import 'package:islom/bloc/counter_bloc/counter_bloc.dart';
 import 'package:islom/bloc/counter_bloc/counter_event.dart';
 import 'package:islom/bloc/counter_bloc/counter_state.dart';
@@ -24,25 +25,28 @@ class DuaPage extends StatelessWidget {
                 Positioned(
                   top: height * .09,
                   left: width * .07,
-                  child: Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: CustomColors.tile),
-                    width: width * .85,
-                    height: height * .3,
-                    child: Center(
-                      child: Column(
-                        children: [
-                          SizedBox(height: height * .02),
-                          Text(
-                            DuaList.duaList[7],
-                            style: TextStyle(color: Colors.white, fontSize: 26),
-                          ),
-                          SizedBox(height: height * .02),
-                          Text(
-                            DuaList.duaTranslation[7],
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                        ],
+                  child: GestureDetector(
+                    onTap: ()=>context.push('/dua_helper'),
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: CustomColors.tile),
+                      width: width * .85,
+                      height: height * .3,
+                      child: Center(
+                        child: Column(
+                          children: [
+                            SizedBox(height: height * .02),
+                            Text(
+                              DuaList.duaList[7],
+                              style: TextStyle(color: Colors.white, fontSize: 26),
+                            ),
+                            SizedBox(height: height * .02),
+                            Text(
+                              DuaList.duaTranslation[7],
+                              style: TextStyle(color: Colors.white, fontSize: 16),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
