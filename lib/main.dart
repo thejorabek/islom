@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:islom/bloc/chapter_bloc/chapter_bloc.dart';
 import 'package:islom/bloc/book_bloc/book_bloc.dart';
 import 'package:islom/bloc/book_bloc/book_event.dart';
@@ -18,7 +19,27 @@ import 'package:islom/view/hadis_page.dart';
 import 'package:islom/view/one_surah_page.dart';
 import 'package:islom/view/quran_page.dart';
 
-void main() {
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+Future<void> main() async {
+  
+  WidgetsFlutterBinding.ensureInitialized();
+
+  const AndroidInitializationSettings initializationSettingsAndroid =
+      AndroidInitializationSettings('@mipmap/ic_launcher');
+
+  const DarwinInitializationSettings initializationSettingsIOS =
+      DarwinInitializationSettings();
+
+  const InitializationSettings initializationSettings =
+      InitializationSettings(
+    android: initializationSettingsAndroid,
+    iOS: initializationSettingsIOS,
+  );
+
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
   runApp(const MyApp());
 }
 

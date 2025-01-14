@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islom/bloc/time_bloc/time_bloc.dart';
@@ -6,6 +7,7 @@ import 'package:islom/models/time_model.dart';
 import 'package:islom/utils/colors/colors.dart';
 import 'package:islom/utils/list.dart';
 import 'package:lottie/lottie.dart';
+import '../service/notification_service.dart';
 
 class TimePage extends StatefulWidget {
   const TimePage({super.key});
@@ -15,9 +17,54 @@ class TimePage extends StatefulWidget {
 }
 
 class _TimePageState extends State<TimePage> {
+  Timer? _notificationTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeNotifications();
+    _scheduleDelayedNotification();
+  }
+
+  Future<void> _initializeNotifications() async {
+    await NotificationService.initialize();
+    await NotificationService.requestPermissions();
+  }
+
+  Future<void> _scheduleDelayedNotification() async {
+    _notificationTimer = Timer(const Duration(minutes: 1), () {
+      NotificationService.showNotification(
+        id: 0,
+        title: 'Prayer Times',
+        body: 'Check your prayer times for today',
+      );
+    });
+  }
+
+  void _schedulePrayerNotifications(List<Timings> prayerTimes) {
+    for (var i = 0; i < prayerTimes.length; i++) {
+      NotificationService.showNotification(
+        id: i,
+        title: 'Prayer Time',
+        body: '${prayerTimes[i].asr} time is ${prayerTimes[i].asr}',
+      );
+    }
+  }
+
+  void onPrayerTimesReceived(List<Timings> times) {
+    _schedulePrayerNotifications(times);
+    // ...existing prayer times handling code...
+  }
+
   String formatTimezone(String timezone) {
     final location = timezone.split('/').last;
     return location.replaceAll('_', ' ');
+  }
+
+  @override
+  void dispose() {
+    _notificationTimer?.cancel();
+    super.dispose();
   }
 
   @override
