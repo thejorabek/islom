@@ -46,7 +46,7 @@ class _TimePageState extends State<TimePage> {
       NotificationService.showNotification(
         id: i,
         title: 'Prayer Time',
-        body: '${prayerTimes[i].asr} time is ${prayerTimes[i].asr}',
+        body: '${prayerTimes[i].dhuhr} time is ${prayerTimes[i].dhuhr}',
       );
     }
   }
