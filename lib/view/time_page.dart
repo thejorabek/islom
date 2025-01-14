@@ -32,7 +32,7 @@ class _TimePageState extends State<TimePage> {
   }
 
   Future<void> _scheduleDelayedNotification() async {
-    _notificationTimer = Timer(const Duration(minutes: 1), () {
+    _notificationTimer = Timer(const Duration(seconds: 5), () {
       NotificationService.showNotification(
         id: 0,
         title: 'Prayer Times',

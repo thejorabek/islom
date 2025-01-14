@@ -14,7 +14,7 @@ class NotificationService {
   static Future<void> initialize() async {
     // Android initialization
     final AndroidInitializationSettings initializationSettingsAndroid = 
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('@mipmap/ic_launcher'); // Changed from @mipmap/ic_launcher
 
     // iOS initialization
     final DarwinInitializationSettings initializationSettingsIOS = 
@@ -56,7 +56,7 @@ class NotificationService {
           importance: Importance.max,
           priority: Priority.high,
           playSound: true,
-          icon: '@mipmap/ic_launcher',
+          icon: '@mipmap/ic_launcher', // Changed from @mipmap/ic_launcher
         ),
         iOS: const DarwinNotificationDetails(
           presentAlert: true,
@@ -91,4 +91,14 @@ class NotificationService {
     
     // No need to request permissions for Android
   }
+
+  final DarwinNotificationDetails iOSPlatformChannelSpecifics = DarwinNotificationDetails(
+  threadIdentifier: 'prayer_times',
+  presentAlert: true,
+  presentBadge: true,
+  presentSound: true,
+  attachments: [
+    DarwinNotificationAttachment('AppIcon.appiconset/Icon-App-20x20@3x.png'), // Custom icon
+  ],
+);
 }
