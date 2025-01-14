@@ -67,7 +67,7 @@ class _QuranPageState extends State<QuranPage> {
             },
           );
         } else {
-          return Center(child: Text('Press a button to load Surah list.'));
+          return Center(child: Text('Error on loading surahs'));
         }
       }),
     );

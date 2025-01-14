@@ -221,7 +221,7 @@ class _OneSurahPageState extends State<OneSurahPage> {
           } else if (state is OneSurahError) {
             return Center(child: Text(state.message));
           } else {
-            return Center(child: Text('No surah details available.'));
+            return Center(child: Text('Error on loading surah'));
           }
         },
       ),

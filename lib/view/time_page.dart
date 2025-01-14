@@ -165,7 +165,7 @@ class _TimePageState extends State<TimePage> {
             } else if (state is PrayerTimeError) {
               return Center(child: Text(state.message));
             } else {
-              return Center(child: Text("Press the button to load data"));
+              return Center(child: Text("Error on loading time for current location"));
             }
           },
         ));

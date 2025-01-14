@@ -70,7 +70,7 @@ class _ChapterPageState extends State<ChapterPage> {
           } else if (state is ChapterError) {
             return Center(child: Text(state.message));
           } else {
-            return Center(child: Text('No data available.'));
+            return Center(child: Text('Error on loading chapters'));
           }
         },
       ),

@@ -123,7 +123,7 @@ class _HadisPageState extends State<HadisPage> {
           } else if (state is HadithError) {
             return Center(child: Text(state.message));
           } else {
-            return Center(child: Text('No data available.'));
+            return Center(child: Text('Error on loading books'));
           }
         },
       ),
