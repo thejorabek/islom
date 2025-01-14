@@ -19,7 +19,7 @@ class DuaHelperPage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: CustomColors.background,
         title: Text('Dua', style: TextStyle(fontFamily: 'Quicksand', color: Colors.white, fontWeight: FontWeight.bold)),
-        leading: IconButton(onPressed: () => context.push('/dua'), icon: Icon(Icons.arrow_back_ios_new_outlined)),
+        leading: IconButton(onPressed: () => context.pop(context), icon: Icon(Icons.arrow_back_ios_new_outlined)),
         iconTheme: IconThemeData(color: Colors.white),
       ),
       body: ListView.builder(

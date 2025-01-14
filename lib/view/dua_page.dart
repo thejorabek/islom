@@ -57,7 +57,6 @@ class DuaPage extends StatelessWidget {
                                 ],
                               );
                             }
-                            // Default/Initial state
                             return Column(
                               children: [
                                 SizedBox(height: height * .02),
