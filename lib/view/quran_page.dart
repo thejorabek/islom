@@ -51,7 +51,7 @@ class _QuranPageState extends State<QuranPage> {
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, fontFamily: 'Quicksand', color: Colors.white),
                     ),
                     subtitle: Text(
-                      '${surah.numberOfAyahs.toString()} ayahs' ?? '',
+                      '${surah.numberOfAyahs.toString()} ayahs',
                       style: TextStyle(fontFamily: 'Quicksand', color: Colors.white),
                     ),
                     trailing: Text(
