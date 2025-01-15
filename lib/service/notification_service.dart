@@ -3,37 +3,35 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 class NotificationService {
   static final FlutterLocalNotificationsPlugin _notificationsPlugin = FlutterLocalNotificationsPlugin();
 
-  static final AndroidNotificationChannel channel = const AndroidNotificationChannel(
-    'high_importance_channel',
-    'High Importance Notifications',
-    description: 'This channel is used for important notifications.',
+  static final AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'prayer_times_channel',  // unique channel id
+    'Prayer Times',          // channel name
+    description: 'Notifications for prayer times',
     importance: Importance.high,
     playSound: true,
+    enableVibration: true,
+    enableLights: true,
   );
 
   static Future<void> initialize() async {
-    // Android initialization
-    final AndroidInitializationSettings initializationSettingsAndroid = 
-        AndroidInitializationSettings('@mipmap/ic_launcher'); // Changed from @mipmap/ic_launcher
-
-    // iOS initialization
-    final DarwinInitializationSettings initializationSettingsIOS = 
-        DarwinInitializationSettings(
-      requestSoundPermission: false,
-      requestBadgePermission: false,
-      requestAlertPermission: false,
+    final AndroidInitializationSettings androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+    final DarwinInitializationSettings iOSSettings = DarwinInitializationSettings(
+      requestSoundPermission: true,
+      requestBadgePermission: true,
+      requestAlertPermission: true,
     );
 
-    final InitializationSettings initializationSettings = InitializationSettings(
-      android: initializationSettingsAndroid,
-      iOS: initializationSettingsIOS,
+    final InitializationSettings initSettings = InitializationSettings(
+      android: androidSettings,
+      iOS: iOSSettings,
     );
 
     await _notificationsPlugin.initialize(
-      initializationSettings,
+      initSettings,
       onDidReceiveNotificationResponse: onNotificationTap,
     );
 
+    // Create Android notification channel
     await _notificationsPlugin
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
@@ -44,27 +42,33 @@ class NotificationService {
     required String body,
     required int id,
   }) async {
-    await _notificationsPlugin.show(
-      id,
-      title,
-      body,
-      NotificationDetails(
-        android: AndroidNotificationDetails(
-          channel.id,
-          channel.name,
-          channelDescription: channel.description,
-          importance: Importance.max,
-          priority: Priority.high,
-          playSound: true,
-          icon: '@mipmap/ic_launcher', // Changed from @mipmap/ic_launcher
+    try {
+      await _notificationsPlugin.show(
+        id,
+        title,
+        body,
+        NotificationDetails(
+          android: AndroidNotificationDetails(
+            channel.id,
+            channel.name,
+            channelDescription: channel.description,
+            importance: Importance.max,
+            priority: Priority.high,
+            playSound: true,
+            enableVibration: true,
+            icon: '@mipmap/ic_launcher',
+          ),
+          iOS: DarwinNotificationDetails(
+            presentAlert: true,
+            presentBadge: true,
+            presentSound: true,
+            threadIdentifier: 'prayer_times',
+          ),
         ),
-        iOS: const DarwinNotificationDetails(
-          presentAlert: true,
-          presentBadge: true,
-          presentSound: true,
-        ),
-      ),
-    );
+      );
+    } catch (e) {
+      print('Error showing notification: $e');
+    }
   }
 
   static Future onDidReceiveLocalNotification(
