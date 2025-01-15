@@ -54,10 +54,8 @@ Your Name - @thejorabek
 
 Project Link: https://github.com/thejorabek/islom
 
-
-
 ## Installation 🚀
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/islom.git
+git clone https://github.com/thejorabek/islom.git
