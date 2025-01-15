@@ -21,6 +21,7 @@ class _QuranPageState extends State<QuranPage> {
     return Scaffold(
       backgroundColor: CustomColors.background,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: CustomColors.background,
         title: Text('Quran', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Quicksand')),
         centerTitle: true,

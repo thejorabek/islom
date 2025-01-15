@@ -81,7 +81,9 @@ class _HadisPageState extends State<HadisPage> {
                         children: [
                           Text(
                             book.bookName,
-                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white,),
                           ),
                           const SizedBox(height: 8),
                           Container(
