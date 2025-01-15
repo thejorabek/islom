@@ -22,18 +22,18 @@ A Flutter application that helps Muslims track prayer times, read duas, and get 
 
 Technologies Used 💻
 
-Flutter
-Bloc State Management
-Local Notifications
-Location Services
+Flutter -
+Bloc State Management -
+Local Notifications -
+Location Services -
 REST API
 
 Dependencies 📦
 
-flutter_bloc
-flutter_local_notifications
-geolocator
-http
+flutter_bloc,
+flutter_local_notifications,
+geolocator,
+http,
 lottie
 
 Contributing 🤝
