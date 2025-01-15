@@ -36,7 +36,7 @@ class DuaHelperPage extends StatelessWidget {
                           index: index,
                         ),
                       );
-                  context.push('/dua');
+                  context.pop(context);
                 },
                 child: Container(
                   padding: EdgeInsets.all(10),

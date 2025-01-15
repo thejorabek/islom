@@ -17,6 +17,7 @@ class DuaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(backgroundColor: CustomColors.background, iconTheme: IconThemeData(color: Colors.white)),
         backgroundColor: CustomColors.background,
         body: BlocBuilder<CountdownBloc, CountdownState>(
           builder: (context, state) {
@@ -25,16 +26,12 @@ class DuaPage extends StatelessWidget {
             return Stack(
               children: [
                 Positioned(
-                  top: height * .09,
                   left: width * .07,
                   child: GestureDetector(
                     onTap: () => context.push('/dua_helper'),
                     child: Container(
                       padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30), 
-                        color: CustomColors.tile
-                      ),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: CustomColors.tile),
                       width: width * .85,
                       child: Center(
                         child: BlocBuilder<DuaBloc, DuaState>(
@@ -99,7 +96,7 @@ class DuaPage extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                    top: height * .49,
+                    top: height * .43,
                     left: state.remaining >= 10 ? width * .29 : width * .40,
                     child: GestureDetector(
                         onTap: state.remaining > 0
@@ -119,7 +116,7 @@ class DuaPage extends StatelessWidget {
                 Visibility(
                   visible: state.remaining == 0,
                   child: Positioned(
-                      top: height * .78,
+                      top: height * .7,
                       left: width * .1,
                       child: SizedBox(
                           width: width * .8,
