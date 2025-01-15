@@ -84,7 +84,7 @@ class DuaPage extends StatelessWidget {
                           }
                         : null,
                     child: Padding(
-                      padding: EdgeInsets.only(top: height * .32, left: width * .1, right: width * .1),
+                      padding: EdgeInsets.only(top: height * .25, left: width * .1, right: width * .1),
                       child: CircularCountdown(
                         countdownTotal: 30,
                         countdownRemaining: state.remaining,
@@ -96,7 +96,7 @@ class DuaPage extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                    top: height * .43,
+                    top: height * .39,
                     left: state.remaining >= 10 ? width * .29 : width * .40,
                     child: GestureDetector(
                         onTap: state.remaining > 0
@@ -116,7 +116,7 @@ class DuaPage extends StatelessWidget {
                 Visibility(
                   visible: state.remaining == 0,
                   child: Positioned(
-                      top: height * .7,
+                      top: height * .65,
                       left: width * .1,
                       child: SizedBox(
                           width: width * .8,
