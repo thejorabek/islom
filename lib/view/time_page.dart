@@ -17,13 +17,14 @@ class TimePage extends StatefulWidget {
 }
 
 class _TimePageState extends State<TimePage> {
-  Timer? _notificationTimer;
+  Timer? _prayerCheckTimer;
+  TimeModel? _currentPrayerTime;
 
   @override
   void initState() {
     super.initState();
     _initializeNotifications();
-    _scheduleDelayedNotification();
+    _startPrayerTimeCheck();
   }
 
   Future<void> _initializeNotifications() async {
@@ -31,29 +32,33 @@ class _TimePageState extends State<TimePage> {
     await NotificationService.requestPermissions();
   }
 
-  Future<void> _scheduleDelayedNotification() async {
-    _notificationTimer = Timer(const Duration(seconds: 5), () {
-      NotificationService.showNotification(
-        id: 0,
-        title: 'Prayer Times',
-        body: 'Check your prayer times for today',
-      );
+  void _startPrayerTimeCheck() {
+    _prayerCheckTimer = Timer.periodic(Duration(seconds: 30), (timer) {
+      if (_currentPrayerTime != null) {
+        _checkAndNotifyPrayerTime(_currentPrayerTime!);
+      }
     });
   }
 
-  void _schedulePrayerNotifications(List<Timings> prayerTimes) {
-    for (var i = 0; i < prayerTimes.length; i++) {
-      NotificationService.showNotification(
-        id: i,
-        title: 'Prayer Time',
-        body: '${prayerTimes[i].dhuhr} time is ${prayerTimes[i].dhuhr}',
-      );
-    }
-  }
+  void _checkAndNotifyPrayerTime(TimeModel prayerTime) {
+    final now = DateTime.now();
+    final currentTime = "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}";
+    
+    final timings = prayerTime.data.timings;
+    final timeNames = TimeNames.timeNames;
 
-  void onPrayerTimesReceived(List<Timings> times) {
-    _schedulePrayerNotifications(times);
-    // ...existing prayer times handling code...
+    for (int index = 0; index < timeNames.length; index++) {
+      final prayerName = timeNames[index];
+      final prayerTime = GetTimes.getTiming(timings, prayerName);
+      
+      if (prayerTime == currentTime) {
+        NotificationService.showNotification(
+          id: index,
+          title: 'Prayer Time',
+          body: 'It is time for $prayerName prayer',
+        );
+      }
+    }
   }
 
   String formatTimezone(String timezone) {
@@ -63,7 +68,7 @@ class _TimePageState extends State<TimePage> {
 
   @override
   void dispose() {
-    _notificationTimer?.cancel();
+    _prayerCheckTimer?.cancel();
     super.dispose();
   }
 
@@ -79,6 +84,7 @@ class _TimePageState extends State<TimePage> {
               return Center(child: LottieBuilder.asset('assets/lotties/loading.json', width: width * 0.3, height: height * 0.3));
             } else if (state is PrayerTimeLoaded) {
               final prayerTime = state.prayerTime;
+              _currentPrayerTime = prayerTime;
               return Stack(
                 children: [
                   Container(
