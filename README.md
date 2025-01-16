@@ -60,6 +60,10 @@ Project Link: https://github.com/thejorabek/islom
 ```bash
 git clone https://github.com/thejorabek/islom.git
 
+2. Change directory
+```bash
 cd islom-master
 
+3. Run code
+```bash
 flutter run
