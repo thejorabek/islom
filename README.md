@@ -59,3 +59,7 @@ Project Link: https://github.com/thejorabek/islom
 1. Clone the repository
 ```bash
 git clone https://github.com/thejorabek/islom.git
+
+cd islom-master
+
+flutter run
