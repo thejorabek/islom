@@ -7,26 +7,29 @@ import 'dart:convert';
 
 class OneSurahBloc extends Bloc<OneSurahEvent, OneSurahState> {
   OneSurahBloc() : super(OneSurahInitial()) {
-    on<LoadOneSurahEvent>(_onLoadOneSurah);
-  }
-
-  Future<void> _onLoadOneSurah(
-      LoadOneSurahEvent event, Emitter<OneSurahState> emit) async {
-    emit(OneSurahLoading());
-    try {
-      final response = await http.get(
-        Uri.parse("https://api.alquran.cloud/v1/surah/${event.surahNumber}"),
-      );
-
-      if (response.statusCode == 200) {
-        final jsonData = json.decode(response.body);
-        final surah = GetOneSurahModel.fromJson(jsonData);
-        emit(OneSurahLoaded(surah));
-      } else {
-        emit(OneSurahError("Failed to load Surah. HTTP Error: ${response.statusCode}"));
+    on<LoadOneSurahEvent>((event, emit) async {
+      emit(OneSurahLoading());
+      try {
+        final response = await http.get(
+          Uri.parse("https://api.alquran.cloud/v1/surah/${event.surahNumber}"),
+        );
+        if (response.statusCode == 200) {
+          final jsonData = jsonDecode(response.body);
+          // Add debug print
+          print('Surah ${event.surahNumber} Response: $jsonData');
+          try {
+            final surah = GetOneSurahModel.fromJson(jsonData);
+            emit(OneSurahLoaded(surah));
+          } catch (parseError) {
+            print('Parse Error: $parseError');
+            emit(OneSurahError('Error parsing surah data: $parseError'));
+          }
+        } else {
+          emit(OneSurahError('Failed to load surah'));
+        }
+      } catch (e) {
+        emit(OneSurahError('An error occurred: $e'));
       }
-    } catch (e) {
-      emit(OneSurahError("An error occurred: $e"));
-    }
+    });
   }
 }

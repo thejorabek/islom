@@ -59,7 +59,6 @@ class Ayah {
     this.page,
     this.ruku,
     this.hizbQuarter,
-    this.sajda,
   });
 
   int? number;
@@ -70,7 +69,6 @@ class Ayah {
   int? page;
   int? ruku;
   int? hizbQuarter;
-  bool? sajda;
   bool isBookmarked = false;
 
   factory Ayah.fromJson(Map<String, dynamic> json) => Ayah(
@@ -82,7 +80,6 @@ class Ayah {
         page: json["page"],
         ruku: json["ruku"],
         hizbQuarter: json["hizbQuarter"],
-        sajda: json["sajda"],
       );
 }
 

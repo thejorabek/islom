@@ -12,10 +12,12 @@ dependencies:
   flutter:
     sdk: flutter
 
+  sliding_clipped_nav_bar:
+    path: packages/sliding_clipped_nav_bar
+
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.0.16
   go_router: ^14.6.3
-  sliding_clipped_nav_bar: ^3.1.1
   bloc: ^8.1.4
   flutter_bloc: ^8.1.6
   equatable: ^2.0.7

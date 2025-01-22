@@ -1,6 +1,6 @@
 # Islom - Prayer Times App 🕌
 
-A Flutter application that helps Muslims track prayer times, read duas, and get notifications for prayer times.
+A Flutter application that helps Muslims read and listen Quran, track prayer times, read duas, and get notifications for prayer times.
 
 ## Screenshots 📱
 
@@ -50,7 +50,7 @@ License 📝
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 Contact 📧
-Your Name - @thejorabek
+Email - boyxorozovjorabek@gmail.com
 
 Project Link: https://github.com/thejorabek/islom
 

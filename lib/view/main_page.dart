@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:islom/utils/colors/colors.dart';
 import 'package:islom/view/dua_page.dart';
+import 'package:islom/view/fasting_page.dart';
 import 'package:islom/view/hadis_page.dart';
 import 'package:islom/view/quran_page.dart';
 import 'package:islom/view/time_page.dart';
@@ -17,6 +18,8 @@ class _MainPageState extends State<MainPage> {
   int selectedIndex = 0;
   Widget build(BuildContext context) {
     PageController _controller = PageController();
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: CustomColors.background,
       body: PageView(
@@ -24,7 +27,7 @@ class _MainPageState extends State<MainPage> {
         controller: _controller,
         children: [
           QuranPage(),
-          HadisPage(),
+          FastingPage(),
           DuaPage(),
           TimePage(),
         ],
@@ -42,19 +45,39 @@ class _MainPageState extends State<MainPage> {
         selectedIndex: selectedIndex,
         barItems: [
           BarItem(
-            icon: Icons.book_outlined,
+            widget: Image.asset(
+              'assets/images/quran.png',
+              width: width * .11,
+              height: height * .11,
+              color: Colors.white,
+            ),
             title: 'Quran',
           ),
           BarItem(
-            icon: Icons.menu_book_outlined,
-            title: 'Hadis',
+            widget: Image.asset(
+              'assets/images/fasting.png',
+              width: width * .11,
+              height: height * .11,
+              color: Colors.white,
+            ),
+            title: 'Fasting',
           ),
           BarItem(
-            icon: Icons.back_hand_outlined,
+            widget: Image.asset(
+              'assets/images/dua.png',
+              width: width * .11,
+              height: height * .11,
+              color: Colors.white,
+            ),
             title: 'Dua',
           ),
           BarItem(
-            icon: Icons.access_time_outlined,
+            widget: Image.asset(
+              'assets/images/time.png',
+              width: width * .11,
+              height: height * .11,
+              color: Colors.white,
+            ),
             title: 'Time',
           ),
         ],
