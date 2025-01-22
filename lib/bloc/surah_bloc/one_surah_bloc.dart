@@ -15,13 +15,10 @@ class OneSurahBloc extends Bloc<OneSurahEvent, OneSurahState> {
         );
         if (response.statusCode == 200) {
           final jsonData = jsonDecode(response.body);
-          // Add debug print
-          print('Surah ${event.surahNumber} Response: $jsonData');
           try {
             final surah = GetOneSurahModel.fromJson(jsonData);
             emit(OneSurahLoaded(surah));
           } catch (parseError) {
-            print('Parse Error: $parseError');
             emit(OneSurahError('Error parsing surah data: $parseError'));
           }
         } else {

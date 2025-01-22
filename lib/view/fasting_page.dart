@@ -99,7 +99,6 @@ class FastingPage extends StatelessWidget {
                                                   fontWeight: FontWeight.bold)),
                                           backgroundColor: Colors.transparent,
                                         ),
-                                        Divider()
                                       ],
                                     ),
                                   ),
