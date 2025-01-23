@@ -14,7 +14,7 @@ class FastingPage extends StatelessWidget {
         backgroundColor: CustomColors.background,
         centerTitle: true,
         title: Text(
-          'Fasting',
+          '',
           style: TextStyle(color: Colors.white, fontFamily: 'Quicksand', fontWeight: FontWeight.bold),
         ),
       ),
@@ -60,15 +60,15 @@ class FastingPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: height * .015),
-            Container(
-              width: width * .9,
-              height: height * .05,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)), color: Colors.white),
-              child: Row(
-                children: [],
-              ),
-            ),
+            // Container(
+            //   width: width * .9,
+            //   height: height * .05,
+            //   decoration:
+            //       BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)), color: Colors.white),
+            //   child: Row(
+            //     children: [],
+            //   ),
+            // ),
             SizedBox(height: height * .015),
             Container(
               width: width * .9,
@@ -81,8 +81,8 @@ class FastingPage extends StatelessWidget {
                     child: ListView.builder(
                         itemCount: 30,
                         itemBuilder: (context, index) {
-                          return index.isEven
-                              ? Padding(
+                          if (index.isEven) {
+                            return Padding(
                                   padding: EdgeInsets.only(top: height * .01, left: width * .02, right: width * .02),
                                   child: Container(
                                     height: height * .05,
@@ -99,11 +99,18 @@ class FastingPage extends StatelessWidget {
                                                   fontWeight: FontWeight.bold)),
                                           backgroundColor: Colors.transparent,
                                         ),
+                                        CircleAvatar(
+                                          child: Text(
+                                            "1",
+                                            style: TextStyle(fontFamily: 'Quiksand', fontSize: 20, color: index.isEven ? Colors.black : Colors.white),
+                                          ),
+                                        )
                                       ],
                                     ),
                                   ),
-                                )
-                              : SizedBox(
+                                );
+                          } else {
+                            return SizedBox(
                                   height: height * .05,
                                   child: Row(
                                     children: [
@@ -120,6 +127,7 @@ class FastingPage extends StatelessWidget {
                                       Divider()
                                     ],
                                   ));
+                          }
                         }),
                   )
                 ],

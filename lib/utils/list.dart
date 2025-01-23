@@ -83,3 +83,8 @@ class GetTimes {
     }
   }
 }
+
+class DayList {
+  static List dayList = [];
+  // dayList.
+}
