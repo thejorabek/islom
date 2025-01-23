@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:islom/utils/colors/colors.dart';
 import 'package:islom/view/dua_page.dart';
 import 'package:islom/view/fasting_page.dart';
-import 'package:islom/view/hadis_page.dart';
 import 'package:islom/view/quran_page.dart';
 import 'package:islom/view/time_page.dart';
 import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
@@ -16,15 +15,16 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int selectedIndex = 0;
+  @override
   Widget build(BuildContext context) {
-    PageController _controller = PageController();
+    PageController controller = PageController();
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: CustomColors.background,
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
-        controller: _controller,
+        controller: controller,
         children: [
           QuranPage(),
           FastingPage(),
@@ -38,7 +38,7 @@ class _MainPageState extends State<MainPage> {
           setState(() {
             selectedIndex = index;
           });
-          _controller.animateToPage(selectedIndex, duration: const Duration(milliseconds: 400), curve: Curves.easeOutQuad);
+          controller.animateToPage(selectedIndex, duration: const Duration(milliseconds: 400), curve: Curves.easeOutQuad);
         },
         iconSize: 30,
         activeColor: Colors.white,
