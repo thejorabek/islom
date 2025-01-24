@@ -7,7 +7,6 @@ class FastingPage extends StatefulWidget {
   const FastingPage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _FastingPageState createState() => _FastingPageState();
 }
 
@@ -48,7 +47,7 @@ class _FastingPageState extends State<FastingPage> {
         backgroundColor: CustomColors.background,
         centerTitle: true,
         title: Text(
-          '',
+          'Fasting',
           style: TextStyle(color: Colors.white, fontFamily: 'Quicksand', fontWeight: FontWeight.bold),
         ),
       ),
@@ -80,12 +79,7 @@ class _FastingPageState extends State<FastingPage> {
                       builder: (context, snapshot) {
                         return Text(
                           snapshot.data ?? '',
-                          style: TextStyle(
-                            fontFamily: 'Quicksand',
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 60
-                          ),
+                          style: TextStyle(fontFamily: 'Quicksand', color: Colors.white, fontWeight: FontWeight.bold, fontSize: 60),
                         );
                       },
                     ),
@@ -122,7 +116,7 @@ class _FastingPageState extends State<FastingPage> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: height * .56,
+                    height: height * .61,
                     child: ListView.builder(
                         itemCount: 30,
                         itemBuilder: (context, index) {
@@ -132,64 +126,120 @@ class _FastingPageState extends State<FastingPage> {
                               child: Container(
                                 height: height * .05,
                                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: Colors.white),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text('${index + 1}',
-                                        style: TextStyle(
-                                            fontFamily: 'Quicksand',
-                                            fontSize: 20,
-                                            color: index.isEven ? Colors.black : Colors.white,
-                                            fontWeight: FontWeight.bold)),
-                                    Text(
-                                      flist[index]['oy'],
-                                      style: TextStyle(fontFamily: 'Quiksand', fontSize: 20, color: index.isEven ? Colors.black : Colors.white),
-                                    ),
-                                    Text(
-                                      flist[index]['haftaKuni'],
-                                      style: TextStyle(fontFamily: 'Quiksand', fontSize: 20, color: index.isEven ? Colors.black : Colors.white),
-                                    ),
-                                    Text(
-                                      flist[index]['saharlik'],
-                                      style: TextStyle(fontFamily: 'Quiksand', fontSize: 20, color: index.isEven ? Colors.black : Colors.white),
-                                    ),
-                                    Text(
-                                      flist[index]['iftorlik'],
-                                      style: TextStyle(fontFamily: 'Quiksand', fontSize: 20, color: index.isEven ? Colors.black : Colors.white),
-                                    ),
-                                  ],
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: width * .01),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width: width * .08,
+                                        height: height * .04,
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: CustomColors.tile),
+                                        child: Center(
+                                          child: Text('${index + 1}',
+                                              style: TextStyle(
+                                                  fontFamily: 'Quicksand',
+                                                  fontSize: 20,
+                                                  color: index.isEven ? Colors.white : Colors.black,
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
+                                      ),
+                                      Text(
+                                        flist[index]['oy'],
+                                        style: TextStyle(fontFamily: 'Quiksand', fontSize: 20, color: index.isEven ? Colors.black : Colors.white),
+                                      ),
+                                      Text(
+                                        flist[index]['haftaKuni'],
+                                        style: TextStyle(fontFamily: 'Quiksand', fontSize: 20, color: index.isEven ? Colors.black : Colors.white),
+                                      ),
+                                      Container(
+                                        width: width * .15,
+                                        height: height * .04,
+                                        decoration:
+                                            BoxDecoration(borderRadius: BorderRadius.circular(10), color: index.isEven ? CustomColors.tile : Colors.white),
+                                        child: Center(
+                                          child: Text(
+                                            flist[index]['saharlik'],
+                                            style: TextStyle(fontFamily: 'Quiksand', fontSize: 20, color: index.isEven ? Colors.white : Colors.black),
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        width: width * .15,
+                                        height: height * .04,
+                                        decoration:
+                                            BoxDecoration(borderRadius: BorderRadius.circular(10), color: index.isEven ? CustomColors.tile : Colors.white),
+                                        child: Center(
+                                          child: Text(
+                                            flist[index]['iftorlik'],
+                                            style: TextStyle(fontFamily: 'Quiksand', fontSize: 20, color: index.isEven ? Colors.white : Colors.black),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             );
                           } else {
-                            return SizedBox(
-                              height: height * .05,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text('${index + 1}',
-                                      style: TextStyle(
-                                          fontFamily: 'Quicksand',
-                                          fontSize: 20,
-                                          color: index.isEven ? Colors.black : Colors.white,
-                                          fontWeight: FontWeight.bold)),
-                                  Text(
-                                    flist[index]['oy'],
-                                    style: TextStyle(fontFamily: 'Quiksand', fontSize: 20, color: index.isEven ? Colors.black : Colors.white),
+                            return Padding(
+                              padding: EdgeInsets.only(top: height * .01, left: width * .02, right: width * .02),
+                              child: SizedBox(
+                                height: height * .05,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: width * .01),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width: width * .08,
+                                        height: height * .04,
+                                        decoration:
+                                            BoxDecoration(borderRadius: BorderRadius.circular(10), color: index.isEven ? Colors.black : Colors.white),
+                                        child: Center(
+                                          child: Text('${index + 1}',
+                                              style: TextStyle(
+                                                  fontFamily: 'Quicksand',
+                                                  fontSize: 20,
+                                                  color: index.isEven ? Colors.white : Colors.black,
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
+                                      ),
+                                      Text(
+                                        flist[index]['oy'],
+                                        style: TextStyle(fontFamily: 'Quiksand', fontSize: 20, color: index.isEven ? Colors.black : Colors.white),
+                                      ),
+                                      Text(
+                                        flist[index]['haftaKuni'],
+                                        style: TextStyle(fontFamily: 'Quiksand', fontSize: 20, color: index.isEven ? Colors.black : Colors.white),
+                                      ),
+                                      Container(
+                                        width: width * .15,
+                                        height: height * .04,
+                                        decoration:
+                                            BoxDecoration(borderRadius: BorderRadius.circular(10), color: index.isEven ? Colors.black : Colors.white),
+                                        child: Center(
+                                          child: Text(
+                                            flist[index]['saharlik'],
+                                            style: TextStyle(fontFamily: 'Quiksand', fontSize: 20, color: index.isEven ? Colors.white : Colors.black),
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        width: width * .15,
+                                        height: height * .04,
+                                        decoration:
+                                            BoxDecoration(borderRadius: BorderRadius.circular(10), color: index.isEven ? Colors.black : Colors.white),
+                                        child: Center(
+                                          child: Text(
+                                            flist[index]['iftorlik'],
+                                            style: TextStyle(fontFamily: 'Quiksand', fontSize: 20, color: index.isEven ? Colors.white : Colors.black),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    flist[index]['haftaKuni'],
-                                    style: TextStyle(fontFamily: 'Quiksand', fontSize: 20, color: index.isEven ? Colors.black : Colors.white),
-                                  ),
-                                  Text(
-                                    flist[index]['saharlik'],
-                                    style: TextStyle(fontFamily: 'Quiksand', fontSize: 20, color: index.isEven ? Colors.black : Colors.white),
-                                  ),
-                                  Text(
-                                    flist[index]['iftorlik'],
-                                    style: TextStyle(fontFamily: 'Quiksand', fontSize: 20, color: index.isEven ? Colors.black : Colors.white),
-                                  ),
-                                ],
+                                ),
                               ),
                             );
                           }
