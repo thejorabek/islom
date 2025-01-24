@@ -19,6 +19,8 @@ class TimePage extends StatefulWidget {
 class _TimePageState extends State<TimePage> {
   Timer? _prayerCheckTimer;
   TimeModel? _currentPrayerTime;
+  StreamController<String>? _countdownController;
+  Timer? _countdownTimer;
 
   @override
   void initState() {
@@ -43,14 +45,14 @@ class _TimePageState extends State<TimePage> {
   void _checkAndNotifyPrayerTime(TimeModel prayerTime) {
     final now = DateTime.now();
     final currentTime = "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}";
-    
+
     final timings = prayerTime.data.timings;
     final timeNames = TimeNames.timeNames;
 
     for (int index = 0; index < timeNames.length; index++) {
       final prayerName = timeNames[index];
       final prayerTime = GetTimes.getTiming(timings, prayerName);
-      
+
       if (prayerTime == currentTime) {
         NotificationService.showNotification(
           id: index,
@@ -61,6 +63,66 @@ class _TimePageState extends State<TimePage> {
     }
   }
 
+  void _startCountdown(String prayerTime) {
+    _countdownController?.close();
+    _countdownTimer?.cancel();
+
+    _countdownController = StreamController<String>();
+
+    _countdownTimer = Timer.periodic(Duration(seconds: 1), (timer) {
+      final now = DateTime.now();
+      final timeparts = prayerTime.split(':');
+      final prayer = DateTime(
+        now.year,
+        now.month,
+        now.day,
+        int.parse(timeparts[0]),
+        int.parse(timeparts[1]),
+      );
+
+      if (prayer.isBefore(now)) {
+        prayer.add(Duration(days: 1));
+      }
+
+      final remaining = prayer.difference(now);
+      final hours = remaining.inHours;
+      final minutes = remaining.inMinutes.remainder(60);
+      final seconds = remaining.inSeconds.remainder(60);
+
+      _countdownController?.add('${hours.toString().padLeft(2, '0')}:'
+          '${minutes.toString().padLeft(2, '0')}:'
+          '${seconds.toString().padLeft(2, '0')}');
+    });
+  }
+
+  void _onPrayerTimesLoaded(TimeModel prayerTime) {
+    final nextPrayer = _getNextPrayerTime(prayerTime.data.timings);
+    _startCountdown(nextPrayer);
+  }
+
+  String _getNextPrayerTime(Timings timings) {
+    final now = DateTime.now();
+    final timeNames = TimeNames.timeNames;
+
+    for (final prayerName in timeNames) {
+      final prayerTime = GetTimes.getTiming(timings, prayerName);
+      final timeparts = prayerTime.split(':');
+      final prayer = DateTime(
+        now.year,
+        now.month,
+        now.day,
+        int.parse(timeparts[0]),
+        int.parse(timeparts[1]),
+      );
+
+      if (prayer.isAfter(now)) {
+        return prayerTime;
+      }
+    }
+
+    return GetTimes.getTiming(timings, timeNames.first);
+  }
+
   String formatTimezone(String timezone) {
     final location = timezone.split('/').last;
     return location.replaceAll('_', ' ');
@@ -69,6 +131,8 @@ class _TimePageState extends State<TimePage> {
   @override
   void dispose() {
     _prayerCheckTimer?.cancel();
+    _countdownController?.close();
+    _countdownTimer?.cancel();
     super.dispose();
   }
 
@@ -85,6 +149,7 @@ class _TimePageState extends State<TimePage> {
             } else if (state is PrayerTimeLoaded) {
               final prayerTime = state.prayerTime;
               _currentPrayerTime = prayerTime;
+              _onPrayerTimesLoaded(prayerTime);
               return Stack(
                 children: [
                   Container(
@@ -102,7 +167,7 @@ class _TimePageState extends State<TimePage> {
                           '${prayerTime.data.date.hijri.weekday.ar} - ${prayerTime.data.date.gregorian.weekday.en}',
                           style: TextStyle(fontFamily: 'Quicksand', color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: height * .05),
+                        SizedBox(height: height * .02),
                         Row(
                           children: [
                             Icon(Icons.location_on_rounded, size: 30, color: Colors.white),
@@ -112,7 +177,23 @@ class _TimePageState extends State<TimePage> {
                               style: TextStyle(fontFamily: 'Quicksand', fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),
                             ),
                           ],
-                        )
+                        ),
+                        SizedBox(height: height * .025),
+                        StreamBuilder<String>(
+                          stream: _countdownController?.stream,
+                          initialData: '00:00:00',
+                          builder: (context, snapshot) {
+                            return Text(
+                              snapshot.data ?? '00:00:00',
+                              style: TextStyle(
+                                fontFamily: 'Quicksand',
+                                color: Colors.white,
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ),
