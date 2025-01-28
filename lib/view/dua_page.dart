@@ -17,7 +17,12 @@ class DuaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(backgroundColor: CustomColors.background, iconTheme: IconThemeData(color: Colors.white)),
+        appBar: AppBar(
+            title: Text('Dua', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Quicksand')),
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            backgroundColor: CustomColors.background,
+            iconTheme: IconThemeData(color: Colors.white)),
         backgroundColor: CustomColors.background,
         body: BlocBuilder<CountdownBloc, CountdownState>(
           builder: (context, state) {

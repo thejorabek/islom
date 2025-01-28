@@ -34,7 +34,7 @@ class _HadisPageState extends State<HadisPage> {
         builder: (context, state) {
           if (state is HadithLoading) {
             return Center(
-              child: Lottie.asset('assets/lotties/loading.json', width: width * 0.3, height: height * 0.3),
+              child: Lottie.asset('assets/lotties/loading.json', width: width * 0.7, height: height * 0.7),
             );
           } else if (state is HadithLoaded) {
             final books = state.hadith.books;

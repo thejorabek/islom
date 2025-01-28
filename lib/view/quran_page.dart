@@ -21,6 +21,10 @@ class _QuranPageState extends State<QuranPage> {
     return Scaffold(
       backgroundColor: CustomColors.background,
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.menu,color: Colors.white),
+        ),
         automaticallyImplyLeading: false,
         backgroundColor: CustomColors.background,
         title: Text('Quran', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Quicksand')),
@@ -29,7 +33,7 @@ class _QuranPageState extends State<QuranPage> {
       body: BlocBuilder<SurahBloc, SurahState>(builder: (context, state) {
         if (state is SurahLoading) {
           return Center(
-            child: Lottie.asset('assets/lotties/loading.json', width: width * 0.3, height: height * 0.3),
+            child: Lottie.asset('assets/lotties/loading.json', width: width * 0.7, height: height * 0.7),
           );
         } else if (state is SurahError) {
           return Center(child: Text(state.message));
@@ -40,7 +44,7 @@ class _QuranPageState extends State<QuranPage> {
             itemBuilder: (context, index) {
               final surah = surahs[index];
               return Padding(
-                padding: EdgeInsets.only(left: width *.03, right: width *.03, bottom: height *.015),
+                padding: EdgeInsets.only(left: width * .03, right: width * .03, bottom: height * .015),
                 child: Container(
                   decoration: BoxDecoration(
                     color: CustomColors.tile,
@@ -71,6 +75,8 @@ class _QuranPageState extends State<QuranPage> {
           return Center(child: Text('Error on loading surahs'));
         }
       }),
+      drawer: Drawer(),
     );
+    
   }
 }

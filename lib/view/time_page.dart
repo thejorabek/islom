@@ -141,11 +141,14 @@ class _TimePageState extends State<TimePage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: CustomColors.background,
+            title: Text('Time', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Quicksand')), centerTitle: true),
         backgroundColor: CustomColors.background,
         body: BlocBuilder<PrayerTimeBloc, PrayerTimeState>(
           builder: (context, state) {
             if (state is PrayerTimeLoading) {
-              return Center(child: LottieBuilder.asset('assets/lotties/loading.json', width: width * 0.3, height: height * 0.3));
+              return Center(child: LottieBuilder.asset('assets/lotties/loading.json', width: width * 0.7, height: height * 0.7));
             } else if (state is PrayerTimeLoaded) {
               final prayerTime = state.prayerTime;
               _currentPrayerTime = prayerTime;
@@ -156,9 +159,9 @@ class _TimePageState extends State<TimePage> {
                     color: CustomColors.background,
                   ),
                   Positioned(
-                    top: height * 0.1,
+                    top: height*.001,
                     right: width * .24,
-                    bottom: height * 0.55,
+                    bottom: height * 0.5,
                     child: Column(
                       children: [
                         Text(prayerTime.data.date.readable,
@@ -178,13 +181,13 @@ class _TimePageState extends State<TimePage> {
                             ),
                           ],
                         ),
-                        SizedBox(height: height * .025),
+                        SizedBox(height: height * .015),
                         StreamBuilder<String>(
                           stream: _countdownController?.stream,
-                          initialData: '00:00:00',
+                          initialData: 'Loading...',
                           builder: (context, snapshot) {
                             return Text(
-                              snapshot.data ?? '00:00:00',
+                              snapshot.data ?? '',
                               style: TextStyle(
                                 fontFamily: 'Quicksand',
                                 color: Colors.white,
@@ -198,7 +201,7 @@ class _TimePageState extends State<TimePage> {
                     ),
                   ),
                   Positioned(
-                    top: height * .32,
+                    top: height * .26,
                     left: 0,
                     right: 0,
                     bottom: 0,

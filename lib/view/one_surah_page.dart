@@ -96,7 +96,7 @@ class _OneSurahPageState extends State<OneSurahPage> {
         builder: (context, state) {
           if (state is OneSurahLoading) {
             return Center(
-              child: Lottie.asset('assets/lotties/loading.json', width: width * 0.3, height: height * 0.3),
+              child: Lottie.asset('assets/lotties/loading.json', width: width * 0.7, height: height * 0.7),
             );
           } else if (state is OneSurahLoaded) {
             final surah = state.surah.data;
@@ -114,17 +114,33 @@ class _OneSurahPageState extends State<OneSurahPage> {
                                 height: height * 0.04,
                                 child: Row(
                                   children: [
-                                    CircleAvatar(
-                                      backgroundColor: Colors.transparent,
-                                      child: Text(
-                                        '${ayah.numberInSurah}',
-                                        style: TextStyle(fontSize: 18, color: Colors.white, fontFamily: 'Quicksand'),
+                                    SizedBox(width: width * .01),
+                                    Container(
+                                      width: width * .07,
+                                      height: height * .03,
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.white),
+                                      child: Center(
+                                        child: Text(
+                                          '${ayah.numberInSurah}',
+                                          style: TextStyle(fontSize: 18, fontFamily: 'Quicksand', fontWeight: FontWeight.bold),
+                                        ),
                                       ),
                                     ),
-                                    // Spacer(),
-                                    // IconButton(onPressed: () => {}, icon: Icon(Icons.ios_share_outlined, color: Colors.white)),
-                                    // IconButton(onPressed: () => {}, icon: Icon(Icons.play_circle_outline_rounded, color: Colors.white)),
-                                    // IconButton(onPressed: () => {}, icon: Icon(Icons.bookmark_border_outlined, color: Colors.white)),
+                                    Spacer(),
+                                    Container(
+                                      width: width * .07,
+                                      height: height * .03,
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.white),
+                                      child: Icon(Icons.ios_share_outlined, size: 23),
+                                    ),
+                                    SizedBox(width: width * .01),
+                                    Container(
+                                      width: width * .07,
+                                      height: height * .03,
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.white),
+                                      child: Icon(Icons.bookmark_border_rounded, size: 23),
+                                    ),
+                                    SizedBox(width: width * .01),
                                   ],
                                 )),
                             subtitle: Padding(

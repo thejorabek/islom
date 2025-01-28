@@ -41,7 +41,7 @@ class _ChapterPageState extends State<ChapterPage> {
       body: BlocBuilder<ChapterBloc, ChapterState>(
         builder: (context, state) {
           if (state is ChapterLoading) {
-            return Center(child: LottieBuilder.asset('assets/lotties/loading.json', width: width * 0.3, height: height * 0.3));
+            return Center(child: LottieBuilder.asset('assets/lotties/loading.json', width: width * 0.7, height: height * 0.7));
           } else if (state is ChapterLoaded) {
             final chapters = state.chapterModel.chapters;
             return ListView.builder(
