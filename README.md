@@ -7,7 +7,6 @@ A Flutter application that helps Muslims read and listen Quran, track prayer tim
 <p float="left">
   <img src="assets/screenshots/Simulator Screenshot - iPhone 16 Plus - 2025-01-15 at 14.30.53.png" width="200" />
   <img src="assets/screenshots/Simulator Screenshot - iPhone 16 Plus - 2025-01-15 at 14.40.33.png" width="200" />
-  <img src="assets/screenshots/Simulator Screenshot - iPhone 16 Plus - 2025-01-15 at 14.30.58.png" width="200" />
   <img src="assets/screenshots/Simulator Screenshot - iPhone 16 Plus - 2025-01-15 at 14.31.18.png" width="200" />
   <img src="assets/screenshots/Simulator Screenshot - iPhone 16 Plus - 2025-01-15 at 14.31.22.png" width="200" />
 </p>
