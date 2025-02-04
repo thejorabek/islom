@@ -12,7 +12,7 @@ import 'package:rxdart/rxdart.dart';
 class OneSurahPage extends StatefulWidget {
   final int? surahNumber;
 
-  const OneSurahPage({Key? key, this.surahNumber}) : super(key: key);
+  const OneSurahPage({super.key, this.surahNumber});
 
   @override
   State<OneSurahPage> createState() => _OneSurahPageState();
@@ -127,13 +127,6 @@ class _OneSurahPageState extends State<OneSurahPage> {
                                       ),
                                     ),
                                     Spacer(),
-                                    Container(
-                                      width: width * .07,
-                                      height: height * .03,
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.white),
-                                      child: Icon(Icons.ios_share_outlined, size: 23),
-                                    ),
-                                    SizedBox(width: width * .01),
                                     Container(
                                       width: width * .07,
                                       height: height * .03,

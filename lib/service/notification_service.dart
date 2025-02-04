@@ -31,7 +31,6 @@ class NotificationService {
       onDidReceiveNotificationResponse: onNotificationTap,
     );
 
-    // Create Android notification channel
     await _notificationsPlugin
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
@@ -77,11 +76,9 @@ class NotificationService {
     String? body,
     String? payload,
   ) async {
-    // Handle iOS notification when app is in foreground
   }
 
   static Future onNotificationTap(NotificationResponse details) async {
-    // Handle notification tap
   }
 
   static Future<void> requestPermissions() async {
@@ -93,7 +90,6 @@ class NotificationService {
           sound: true,
         );
     
-    // No need to request permissions for Android
   }
 
   final DarwinNotificationDetails iOSPlatformChannelSpecifics = DarwinNotificationDetails(

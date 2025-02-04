@@ -21,12 +21,16 @@ class _TimePageState extends State<TimePage> {
   TimeModel? _currentPrayerTime;
   StreamController<String>? _countdownController;
   Timer? _countdownTimer;
+  Timer? _uiRefreshTimer;
 
   @override
   void initState() {
     super.initState();
     _initializeNotifications();
     _startPrayerTimeCheck();
+    _uiRefreshTimer = Timer.periodic(Duration(minutes: 1), (timer) {
+      setState(() {}); // Refresh UI every minute
+    });
   }
 
   Future<void> _initializeNotifications() async {
@@ -128,11 +132,34 @@ class _TimePageState extends State<TimePage> {
     return location.replaceAll('_', ' ');
   }
 
+  String getCurrentPrayer(Timings timings) {
+    final now = DateTime.now();
+    final times = TimeNames.timeNames.map((name) {
+      final time = GetTimes.getTiming(timings, name);
+      final parts = time.split(':');
+      return DateTime(
+        now.year,
+        now.month,
+        now.day,
+        int.parse(parts[0]),
+        int.parse(parts[1]),
+      );
+    }).toList();
+
+    for (int i = 0; i < times.length - 1; i++) {
+      if (now.isAfter(times[i]) && now.isBefore(times[i + 1])) {
+        return TimeNames.timeNames[i];
+      }
+    }
+    return TimeNames.timeNames.last;
+  }
+
   @override
   void dispose() {
     _prayerCheckTimer?.cancel();
     _countdownController?.close();
     _countdownTimer?.cancel();
+    _uiRefreshTimer?.cancel();
     super.dispose();
   }
 
@@ -142,6 +169,7 @@ class _TimePageState extends State<TimePage> {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: CustomColors.background,
             title: Text('Time', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Quicksand')), centerTitle: true),
         backgroundColor: CustomColors.background,
@@ -184,7 +212,7 @@ class _TimePageState extends State<TimePage> {
                         SizedBox(height: height * .015),
                         StreamBuilder<String>(
                           stream: _countdownController?.stream,
-                          initialData: 'Loading...',
+                          initialData: '--:--:--',
                           builder: (context, snapshot) {
                             return Text(
                               snapshot.data ?? '',
@@ -217,7 +245,12 @@ class _TimePageState extends State<TimePage> {
                                 return Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                                   child: Container(
-                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: CustomColors.tile),
+                                    decoration: BoxDecoration(
+                                      color: getCurrentPrayer(prayerTime.data.timings) == TimeNames.timeNames[index]
+                                          ? Colors.green // Active prayer time color
+                                          : Colors.black.withOpacity(0.3), // Default color
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
                                     width: width * 0.9,
                                     height: height * 0.07,
                                     child: Row(
