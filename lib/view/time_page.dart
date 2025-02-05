@@ -132,7 +132,6 @@ class _TimePageState extends State<TimePage> {
       }
     }
 
-    // All prayers passed, return first prayer of tomorrow
     final firstPrayerTime = GetTimes.getTiming(timings, timeNames.first);
     final timeparts = firstPrayerTime.split(':');
     final tomorrowPrayerDateTime = DateTime(
